@@ -18,8 +18,9 @@ namespace Лабораторная_3
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            Circle circle = new Circle(5, Circle.size.Diam);
-           
+            Circle circle = new Circle(5, Circle.size.Rad);
+            Console.WriteLine(circle.Square());
+            Console.ReadKey();
         }
     }
 }

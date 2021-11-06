@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryForGeometry
 {
-    public class Circle : IFigure
+    public class Circle : FigureBase
     {
         
         /// <summary>
@@ -35,7 +35,7 @@ namespace LibraryForGeometry
         /// Площаадь, если задан радиус
         /// </summary>
         /// <returns>Площадь окружности</returns>
-        public double Square ()
+        public override double Square ()
         {
             
             return Math.PI * Quantity * Quantity;
@@ -70,22 +70,8 @@ namespace LibraryForGeometry
             Rad
         }
 
-        /// <summary>
-        /// метод для проверки размера
-        /// </summary>
-        /// <param name="number">принимаемое числовое значение размера фигуры</param>
-        /// <returns>проверенное значение</returns>
-        private static double checkSize(double number)
-        {
-            if(number<0)
-            {
-                throw new Exception("Размер должен быть больше 0");
-            }
-            else
-            {
-                return number;
-            }
-        }
+       
+
 
     }
 }
