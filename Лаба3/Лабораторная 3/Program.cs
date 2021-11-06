@@ -7,11 +7,19 @@ using LibraryForGeometry;
 
 namespace Лабораторная_3
 {
+    /// <summary>
+    /// класс для тестирования
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// точка входа в программу
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
-            s = Circle.Squre(5)
+            Circle circle = new Circle(5, Circle.size.Diam);
+           
         }
     }
 }
