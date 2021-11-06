@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace LibraryForGeometry
 {
+    /// <summary>
+    /// абстрактная окружность
+    /// </summary>
     public class Circle : FigureBase
     {
         
@@ -41,9 +44,9 @@ namespace LibraryForGeometry
             return Math.PI * Quantity * Quantity;
         }
 
-
+        
         /// <summary>
-        /// площадь, если задан диаметр
+        /// площадь, если задан диаметр, на будущее
         /// </summary>
         /// <returns>Площадь окружности</returns>
         public double SquareDiam()
@@ -69,7 +72,7 @@ namespace LibraryForGeometry
             Diam,
             Rad
         }
-
+        
        
 
 

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace LibraryForGeometry
 {
+    /// <summary>
+    /// абстрактный прямоугольник
+    /// </summary>
     public class Rectangle : FigureBase
     {
         /// <summary>
@@ -87,18 +90,17 @@ namespace LibraryForGeometry
         }
 
 
-
+        /// <summary>
+        ///  Площадь прямоугольника
+        /// </summary>
+        /// <returns>площадь прямоугольника</returns>
         public override double Square()
         {
             return Length * Width;
         }
-        
-        
 
 
-
-
-
+        //TODO: нужен конструктор класса 
 
 
 

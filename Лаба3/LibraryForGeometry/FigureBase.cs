@@ -22,7 +22,7 @@ namespace LibraryForGeometry
         /// метод для проверки полей
         /// </summary>
         /// <param name="number"></param>
-        /// <returns></returns>
+        /// <returns>проверенное число</returns>
         protected static double checkSize(double number)
         {
             if (number < 0)
