@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 namespace LibraryForGeometry
 {
     /// <summary>
-    /// Абстрактный треугольник
+    /// Треугольник
     /// </summary>
     public class Triangle : FigureBase
     {
+     
         /// <summary>
         /// первая сторона треугольника 
         /// </summary>
@@ -23,11 +24,33 @@ namespace LibraryForGeometry
         {
             get
             {
-                return _sideOne;
+                if (_sideOne != 0)
+                {
+                    return _sideOne;
+                }
+                else
+                {
+                    throw new Exception("стороны 1 еще не сущствует");
+                }
             }
             set
             {
-                _sideOne = checkSize(value);
+                if(CheckSize(value)==true && SideTwo != 0 && SideThree != 0)
+                {
+                    if(ValidTringle(SideOne, SideTwo, SideThree) == true)
+                    {
+                        _sideOne = value;
+                    }
+                    else
+                    {
+                        throw new Exception("треугольника не существует");
+                    }
+                }
+                else if(CheckSize(value))
+                {
+                    _sideOne = value;
+                }
+
             }
         }
 
@@ -43,39 +66,90 @@ namespace LibraryForGeometry
         {
             get
             {
-                return _sideTwo;
+                if (_sideTwo != 0)
+                {
+                    return _sideTwo;
+                }
+                else
+                {
+                    throw new Exception("стороны 2 еще не сущствует");
+                }
             }
             set
             {
-                _sideTwo = checkSize(value);
+                if (CheckSize(value) == true && SideOne != 0 && SideThree != 0)
+                {
+                    if (ValidTringle(SideOne, SideTwo, SideThree) == true)
+                    {
+                        _sideTwo = value;
+                    }
+                    else
+                    {
+                        throw new Exception("треугольника не существует");
+                    }
+                }
+                else if (CheckSize(value))
+                {
+                    _sideTwo = value;
+                }
+
             }
         }
 
         /// <summary>
-        /// C
+        /// переменная для третьей стороны треугольника
         /// </summary>
         private double _sideThree;
 
         /// <summary>
-        /// _sideThree
+        /// Третья сторона треугольника
         /// </summary>
         public double SideThree
         {
             get
             {
-                return _sideThree;
+                if (_sideThree != 0)
+                {
+                    return _sideThree;
+                }
+                else
+                {
+                    throw new Exception("стороны 3 еще не сущствует");
+                }
             }
             set
             {
-                _sideThree = checkSize(value);
+                if (CheckSize(value) == true && SideOne != 0 && SideTwo != 0)
+                {
+                    if (ValidTringle(SideOne, SideTwo, SideThree) == true)
+                    {
+                        _sideThree = value;
+                    }
+                    else
+                    {
+                        throw new Exception("треугольника не существует");
+                    }
+                }
+                else if (CheckSize(value))
+                {
+                    _sideThree = value;
+                }
+
             }
         }
 
-        private double semiPerimeter(double a,double b,double c)
+        //TODO: RSDN+
+        /// <summary>
+        /// метод для вычисления полупериметра
+        /// </summary>
+        /// <param name="sideOne">первая сторона</param>
+        /// <param name="sideTwo">вторая сторона</param>
+        /// <param name="sideThree">третья сторона</param>
+        /// <returns>полупериметр</returns>
+        private double SemiPerimeter(double sideOne,double sideTwo,double sideThree)
         {
-            return (a + b + c) * 1 / 2;
-        }
-        
+            return (sideOne + sideTwo + sideThree) * 1.0 / 2.0;
+        }       
 
 
         /// <summary>
@@ -84,8 +158,61 @@ namespace LibraryForGeometry
         /// <returns>Площадь треугольника</returns>
         public override double Square()
         {
-            double p = semiPerimeter(_sideOne, _sideTwo, _sideThree);
+            double p = SemiPerimeter(_sideOne, _sideTwo, _sideThree);
             return Math.Sqrt(p*(p- _sideOne)*(p - _sideTwo)*(p- _sideThree)); 
+        }
+
+        //TODO: RSDN+
+        /// <summary>
+        /// конструктор класса
+        /// </summary>
+        /// <param name="sideOne">первая сторона</param>
+        /// <param name="sideTwo">вторая сторона</param>
+        /// <param name="sideThree">третья сторона</param>
+        public Triangle(double sideOne, double sideTwo, double sideThree)
+        {
+            SideOne = sideOne;
+            SideTwo = sideTwo;
+            SideThree = sideThree; 
+        }
+
+        /// <summary>
+        /// Пустой конструктор
+        /// </summary>
+        public Triangle() { }
+       
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sideOne"></param>
+        /// <param name="sideTwo"></param>
+        /// <param name="sideThree"></param>
+        /// <returns></returns>
+        //public static bool ValidTringle(double sideOne, double sideTwo, double sideThree)
+        //{
+        //    if (sideOne + sideTwo > sideThree && sideOne + sideThree > sideTwo && sideThree + sideTwo > sideOne)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
+        private bool ValidTringle(double sideOne, double sideTwo, double sideThree)
+        {
+            if (sideOne + sideTwo > sideThree && sideOne + sideThree > sideTwo && sideThree + sideTwo > sideOne)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+           
         }
     }
 }

@@ -23,19 +23,17 @@ namespace LibraryForGeometry
         /// </summary>
         /// <param name="number"></param>
         /// <returns>проверенное число</returns>
-        protected static double checkSize(double number)
+        protected bool CheckSize(double number)
         {
-            if (number < 0)
+            if (number < 0.0)
             {
+
                 throw new Exception("Величина должна быть положительной");
             }
             else
             {
-                return number;
+                return true;
             }
         }
-
-
-
     }
 }

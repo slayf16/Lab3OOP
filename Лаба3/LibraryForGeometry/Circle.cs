@@ -11,25 +11,26 @@ namespace LibraryForGeometry
     /// </summary>
     public class Circle : FigureBase
     {
-        
         /// <summary>
         /// поле для радиуса или диаметра
         /// </summary>
-        private double _quantity;
+        private double _radius;
 
         /// <summary>
         /// публичное поле для присваения радиуса
         /// </summary>
-        public double Quantity
+        public double Radius
         {
             get
             {
-                return _quantity;
+                return _radius;
             }
-
             set
             {
-                _quantity = checkSize(value);
+                if (CheckSize(value))
+                {
+                    _radius = value;
+                }
             }
         }
 
@@ -40,41 +41,26 @@ namespace LibraryForGeometry
         /// <returns>Площадь окружности</returns>
         public override double Square ()
         {
-            
-            return Math.PI * Quantity * Quantity;
+
+            return Math.PI * Radius * Radius;
         }
 
         
-        /// <summary>
-        /// площадь, если задан диаметр, на будущее
-        /// </summary>
-        /// <returns>Площадь окружности</returns>
-        public double SquareDiam()
-        {
-            return Math.PI * Quantity * Quantity * 1 / 4;
-        }
+  
         /// <summary>
         /// Конструктор класса 
         /// </summary>
         /// <param name="radius">поле радиуса</param>
-        public Circle(double radius, size size)
+        public Circle(double radius)
         {
-            Quantity = radius;
+            Radius = radius;
         }
 
-
-        //TODO: подумать о надобности 
         /// <summary>
-        /// для выбора диаметра 
+        /// пустой конструктор
         /// </summary>
-       public enum size
-        {
-            Diam,
-            Rad
-        }
-        
-       
+        public Circle() { }
 
-
+      
     }
 }

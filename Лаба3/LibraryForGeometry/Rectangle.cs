@@ -27,7 +27,10 @@ namespace LibraryForGeometry
             }
             set
             {
-                _length = checkSize(value);
+                if (CheckSize(value))
+                {
+                    _length = value;
+                }
             }
         }
 
@@ -47,47 +50,13 @@ namespace LibraryForGeometry
             }
             set
             {
-                _width = checkSize(value);
+                if (CheckSize(value))
+                {
+                    _width = value;
+                }
             }
-        }
-
-        /// <summary>
-        /// поле для диагонали
-        /// </summary>
-        private double _diagonal;
-
-        /// <summary>
-        /// Диагональ прямоугольника
-        /// </summary>
-        public double Diagonal
-        {
-            get
-            {
-                return _diagonal;
-            }
-            set
-            {
-                _diagonal = checkSize(value);
-            }
-        }
-
-        //TODO: Продумать для угла
-        /// <summary>
-        /// поле для угла между диагоналям
-        /// </summary>
-        private double _angle;
-
-        public double Angle
-        {
-            get
-            {
-                return _angle;
-            }
-            set
-            {
-                _angle = Math.PI*checkSize(value)*1/180;
-            }
-        }
+        }      
+             
 
 
         /// <summary>
@@ -100,9 +69,21 @@ namespace LibraryForGeometry
         }
 
 
-        //TODO: нужен конструктор класса 
+        /// <summary>
+        /// конструктор класса
+        /// </summary>
+        /// <param name="length">длина</param>
+        /// <param name="width">ширина</param>
+        public Rectangle (double length, double width)
+        {
+            Length = length;
+            Width = width;
+        }
 
-
+        /// <summary>
+        /// пустой конструктор
+        /// </summary>
+        public Rectangle() { }
 
     }
 }
