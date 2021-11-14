@@ -27,10 +27,10 @@ namespace LibraryForGeometry
             }
             set
             {
-                if (CheckSize(value))
-                {
-                    _radius = value;
-                }
+               
+                
+                    _radius = CheckSize(value);
+                
             }
         }
 

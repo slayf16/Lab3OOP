@@ -27,10 +27,10 @@ namespace LibraryForGeometry
             }
             set
             {
-                if (CheckSize(value))
-                {
-                    _length = value;
-                }
+                
+                
+                    _length = CheckSize(value);
+                
             }
         }
 
@@ -50,10 +50,10 @@ namespace LibraryForGeometry
             }
             set
             {
-                if (CheckSize(value))
-                {
-                    _width = value;
-                }
+              
+                
+                    _width = CheckSize(value);
+                
             }
         }      
              

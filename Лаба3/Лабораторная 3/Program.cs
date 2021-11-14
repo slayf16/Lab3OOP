@@ -30,7 +30,7 @@ namespace Лабораторная_3
                         {
                             Console.WriteLine("треугольник/окружность/прямоугольник");
                             FigureBase a = FigureWithConsole(Console.ReadLine());
-                            Console.WriteLine($"площадь треугольника равна: {a.Square()}");
+                            Console.WriteLine($"площадь фигуры равна: {a.Square()}");
                             Console.ReadKey();
 
 
@@ -50,80 +50,100 @@ namespace Лабораторная_3
             }
         }
 
+
         /// <summary>
-        /// для работы с консолью
+        /// TODO:
         /// </summary>
-        /// <param name="line">входная строка</param>
+        /// <param name="line"></param>
         /// <returns></returns>
         private static FigureBase FigureWithConsole(string line)
         {
+            
             FigureBase figureBase;
-            var listVal3 = new List<Tuple<string, Action>>();
-
             switch (line)
             {
                 case "треугольник":
+                    List<double> numbers = new List<double>();
+                    while (true)
+                    {
+                        for (int i = 0; i < GetPhrasesToConsole.GetList(line).Count; i++)
+                        {
 
-                    Triangle triangle;
+                            while (true)
+                            {
+                                try
+                                {
+                                    Console.WriteLine(GetPhrasesToConsole.GetList(line)[i]);                                           
+                                    numbers.Add(FigureBase.CheckSize(
+                                        Convert.ToDouble(СhekValue(Console.ReadLine()))));
+                                    break;
 
-                    //triangle = new Triangle(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()));
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex.Message);
+                                }
+                            }
+                        }
+                        try
+                        {
+                            Triangle triangle = new Triangle(numbers[0], numbers[1], numbers[2]);
+                            figureBase = triangle;
+                            break;
+                        }
+                        catch(Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                    }
+                    
                     break;
-
-
 
                 case "прямоугольник":
                     Rectangle rectangle = new Rectangle();
-                    listVal3.Add
-                           (
-                               new Tuple<string, Action>
-                               (
-                                   "введите длину сторону: ",
-                                   () =>
-                                   {
-                                       rectangle.Length = Convert.ToDouble(Console.ReadLine());
-                                   }
-
-                               )
-                           );
-
-                    listVal3.Add
-                          (
-                              new Tuple<string, Action>
-                              (
-                                  "введите ширину сторону: ",
-                                  () =>
-                                  {
-                                      rectangle.Width = Convert.ToDouble(Console.ReadLine());
-                                  }
-
-                              )
-                          );
-                    foreach (var actionItem in listVal3)
+                    for (int i = 0; i < GetPhrasesToConsole.GetList(line).Count; i++)
                     {
-                        ValidateInput(actionItem.Item1, actionItem.Item2);
+                        while (true)
+                        {
+                            try
+                            {
+                                Console.WriteLine(GetPhrasesToConsole.GetList(line)[i]);
+                                switch (i)
+                                {
+                                    case 0:
+                                        rectangle.Length = Convert.ToDouble(Console.ReadLine());
+                                        break;
+                                    case 1:
+                                        rectangle.Width = Convert.ToDouble(Console.ReadLine());
+                                        break;
+                                }
+                                break;
+                            }
+                            catch(Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+                        }
                     }
-
                     figureBase = rectangle;
                     break;
 
 
                 case "окружность":
                     Circle circle = new Circle();
-                    listVal3.Add
-                           (
-                               new Tuple<string, Action>
-                               (
-                                   "введите радиус сторону: ",
-                                   () =>
-                                   {
-                                       circle.Radius = Convert.ToDouble(Console.ReadLine());
-                                   }
-
-                               )
-                           );
-                    foreach (var actionItem in listVal3)
+                    while (true)
                     {
-                        ValidateInput(actionItem.Item1, actionItem.Item2);
+                        try
+                        {
+                            Console.WriteLine(GetPhrasesToConsole.GetList(line)[0]);
+                            circle.Radius = Convert.ToDouble(Console.ReadLine());
+                            break;
+                        }
+                        catch(Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                        
                     }
                     figureBase = circle;
                     break;
@@ -133,42 +153,24 @@ namespace Лабораторная_3
             }
             return figureBase;
         }
-
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="outputMessage"></param>
-        /// <param name="validationAction"></param>
-        private static void ValidateInput(string outputMessage,
-               Action validationAction)
-        {
-            while (true)
-            {
-                try
-                {
-                    Console.Write(outputMessage);
-                    validationAction();
-                    return;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"{ex.Message}\nПопробуйте снова.");
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
+        /// TODO:
         /// </summary>
         /// <param name="line"></param>
-        static void СhekValue(string line)
+        public static string СhekValue(string line)
         {
             int number;
             bool isParsed = Int32.TryParse(line, out number);
-            if(!isParsed)
+            if (!isParsed)
             {
                 throw new Exception("Необходимо ввести числовое значение");
             }
+            else
+            {
+                return line;
+            }
         }
+
     }
+    
 }

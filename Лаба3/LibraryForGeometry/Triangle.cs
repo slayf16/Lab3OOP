@@ -20,39 +20,39 @@ namespace LibraryForGeometry
         /// <summary>
         /// первая сторона треугольника 
         /// </summary>
-        public double SideOne
-        {
-            get
-            {
-                if (_sideOne != 0)
-                {
-                    return _sideOne;
-                }
-                else
-                {
-                    throw new Exception("стороны 1 еще не сущствует");
-                }
-            }
-            set
-            {
-                if(CheckSize(value)==true && SideTwo != 0 && SideThree != 0)
-                {
-                    if(ValidTringle(SideOne, SideTwo, SideThree) == true)
-                    {
-                        _sideOne = value;
-                    }
-                    else
-                    {
-                        throw new Exception("треугольника не существует");
-                    }
-                }
-                else if(CheckSize(value))
-                {
-                    _sideOne = value;
-                }
+        //public double SideOne
+        //{
+        //    get
+        //    {
+        //        if (_sideOne != 0)
+        //        {
+        //            return _sideOne;
+        //        }
+        //        else
+        //        {
+        //            throw new Exception("стороны 1 еще не сущствует");
+        //        }
+        //    }
+        //    set
+        //    {
+        //        if(CheckSize(value)==true & _sideTwo != 0 & _sideThree != 0)
+        //        {
+        //            if(ValidTringle(SideOne, SideTwo, SideThree) == true)
+        //            {
+        //                _sideOne = value;
+        //            }
+        //            else
+        //            {
+        //                throw new Exception("треугольника не существует");
+        //            }
+        //        }
+        //        else if(CheckSize(value))
+        //        {
+        //            _sideOne = value;
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
         /// <summary>
         /// вторая сторона треугольника
@@ -62,39 +62,39 @@ namespace LibraryForGeometry
         /// <summary>
         /// вторая сторона треугольника
         /// </summary>
-        public double SideTwo
-        {
-            get
-            {
-                if (_sideTwo != 0)
-                {
-                    return _sideTwo;
-                }
-                else
-                {
-                    throw new Exception("стороны 2 еще не сущствует");
-                }
-            }
-            set
-            {
-                if (CheckSize(value) == true && SideOne != 0 && SideThree != 0)
-                {
-                    if (ValidTringle(SideOne, SideTwo, SideThree) == true)
-                    {
-                        _sideTwo = value;
-                    }
-                    else
-                    {
-                        throw new Exception("треугольника не существует");
-                    }
-                }
-                else if (CheckSize(value))
-                {
-                    _sideTwo = value;
-                }
+        //public double SideTwo
+        //{
+        //    get
+        //    {
+        //        if (_sideTwo != 0)
+        //        {
+        //            return _sideTwo;
+        //        }
+        //        else
+        //        {
+        //            throw new Exception("стороны 2 еще не сущствует");
+        //        }
+        //    }
+        //    set
+        //    {
+        //        if (CheckSize(value) == true && _sideOne != 0 && _sideTwo != 0)
+        //        {
+        //            if (ValidTringle(SideOne, SideTwo, SideThree) == true)
+        //            {
+        //                _sideTwo = value;
+        //            }
+        //            else
+        //            {
+        //                throw new Exception("треугольника не существует");
+        //            }
+        //        }
+        //        else if (CheckSize(value))
+        //        {
+        //            _sideTwo = value;
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
         /// <summary>
         /// переменная для третьей стороны треугольника
@@ -104,39 +104,39 @@ namespace LibraryForGeometry
         /// <summary>
         /// Третья сторона треугольника
         /// </summary>
-        public double SideThree
-        {
-            get
-            {
-                if (_sideThree != 0)
-                {
-                    return _sideThree;
-                }
-                else
-                {
-                    throw new Exception("стороны 3 еще не сущствует");
-                }
-            }
-            set
-            {
-                if (CheckSize(value) == true && SideOne != 0 && SideTwo != 0)
-                {
-                    if (ValidTringle(SideOne, SideTwo, SideThree) == true)
-                    {
-                        _sideThree = value;
-                    }
-                    else
-                    {
-                        throw new Exception("треугольника не существует");
-                    }
-                }
-                else if (CheckSize(value))
-                {
-                    _sideThree = value;
-                }
+        //public double SideThree
+        //{
+        //    get
+        //    {
+        //        if (_sideThree != 0)
+        //        {
+        //            return _sideThree;
+        //        }
+        //        else
+        //        {
+        //            throw new Exception("стороны 3 еще не сущствует");
+        //        }
+        //    }
+        //    set
+        //    {
+        //        if (CheckSize(value) == true && _sideOne != 0 && SideTwo != 0)
+        //        {
+        //            if (ValidTringle(SideOne, SideTwo, SideThree) == true)
+        //            {
+        //                _sideThree = value;
+        //            }
+        //            else
+        //            {
+        //                throw new Exception("треугольника не существует");
+        //            }
+        //        }
+        //        else if (CheckSize(value))
+        //        {
+        //            _sideThree = value;
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
         //TODO: RSDN+
         /// <summary>
@@ -171,15 +171,22 @@ namespace LibraryForGeometry
         /// <param name="sideThree">третья сторона</param>
         public Triangle(double sideOne, double sideTwo, double sideThree)
         {
-            SideOne = sideOne;
-            SideTwo = sideTwo;
-            SideThree = sideThree; 
+            if(sideOne>0 & sideTwo>0 & sideThree>0 & ValidTringle(sideOne,sideTwo,sideThree)==true)
+            {
+                _sideOne = sideOne;
+                _sideTwo = sideTwo;
+                _sideThree = sideThree;
+            }
+
         }
 
         /// <summary>
         /// Пустой конструктор
         /// </summary>
-        public Triangle() { }
+      //  public Triangle() { }
+        
+            
+       
        
 
 
@@ -203,13 +210,14 @@ namespace LibraryForGeometry
         //}
         private bool ValidTringle(double sideOne, double sideTwo, double sideThree)
         {
+            
             if (sideOne + sideTwo > sideThree && sideOne + sideThree > sideTwo && sideThree + sideTwo > sideOne)
             {
                 return true;
             }
             else
             {
-                return false;
+                throw new Exception("Треугольника не существует");              
             }
             
            

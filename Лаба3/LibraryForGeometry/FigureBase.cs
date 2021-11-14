@@ -23,7 +23,7 @@ namespace LibraryForGeometry
         /// </summary>
         /// <param name="number"></param>
         /// <returns>проверенное число</returns>
-        protected bool CheckSize(double number)
+        public static double CheckSize(double number)
         {
             if (number < 0.0)
             {
@@ -32,7 +32,7 @@ namespace LibraryForGeometry
             }
             else
             {
-                return true;
+                return number;
             }
         }
     }
