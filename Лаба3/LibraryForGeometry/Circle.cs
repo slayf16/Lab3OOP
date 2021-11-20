@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LibraryForGeometry
 {
     /// <summary>
-    /// абстрактная окружность
+    /// окружность
     /// </summary>
     public class Circle : FigureBase
     {
@@ -26,14 +26,10 @@ namespace LibraryForGeometry
                 return _radius;
             }
             set
-            {
-               
-                
-                    _radius = CheckSize(value);
-                
+            {                               
+                _radius = CheckSize(value);                
             }
         }
-
 
         /// <summary>
         /// Площаадь, если задан радиус
@@ -43,9 +39,7 @@ namespace LibraryForGeometry
         {
 
             return Math.PI * Radius * Radius;
-        }
-
-        
+        }        
   
         /// <summary>
         /// Конструктор класса 

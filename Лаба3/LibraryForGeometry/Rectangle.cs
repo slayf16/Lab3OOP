@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LibraryForGeometry
 {
     /// <summary>
-    /// абстрактный прямоугольник
+    /// прямоугольник
     /// </summary>
     public class Rectangle : FigureBase
     {
@@ -26,11 +26,8 @@ namespace LibraryForGeometry
                 return _length;
             }
             set
-            {
-                
-                
-                    _length = CheckSize(value);
-                
+            {                               
+                _length = CheckSize(value);                
             }
         }
 
@@ -57,8 +54,6 @@ namespace LibraryForGeometry
             }
         }      
              
-
-
         /// <summary>
         ///  Площадь прямоугольника
         /// </summary>
@@ -67,7 +62,6 @@ namespace LibraryForGeometry
         {
             return Length * Width;
         }
-
 
         /// <summary>
         /// конструктор класса

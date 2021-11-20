@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Circle.cs" />
     <Compile Include="FigureBase.cs" />
-    <Compile Include="GetPhrasesToConsole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rectangle.cs" />
     <Compile Include="Triangle.cs" />

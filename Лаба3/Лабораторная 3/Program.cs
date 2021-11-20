@@ -11,10 +11,10 @@ namespace Лабораторная_3
     /// <summary>
     /// класс для тестирования
     /// </summary>
-    class Program
+    public class Program
     {
         /// <summary>
-        /// точка входа в программу
+        /// тестирование работы классов
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
@@ -22,145 +22,136 @@ namespace Лабораторная_3
             while (true)
             {
                 Console.WriteLine("Начнем? (да/нет)");
-
+                FigureBase figure;
                 switch (Console.ReadLine())
                 {
                     case "да":
                         try
                         {
-                            Console.WriteLine("треугольник/окружность/прямоугольник");
-                            FigureBase a = FigureWithConsole(Console.ReadLine());
-                            Console.WriteLine($"площадь фигуры равна: {a.Square()}");
+                            Console.WriteLine("1-треугольник\n2-окружность\n3-прямоугольник");
+                            switch (Int32.Parse(Console.ReadLine()))
+                            {
+                                case 1:
+                                    figure = TriangleTohConsole();
+                                    break;
+                                case 2:
+                                    figure = CircleTohConsole();
+                                    break;
+                                case 3:
+                                    figure = RectangleTohConsole();
+                                    break;
+                                default:
+                                    throw new Exception("Нееобходимо выбрать фигуру");
+                            }
+                            Console.WriteLine($"площадь фигуры: {figure.Square()}");
                             Console.ReadKey();
-
-
                         }
                         catch (Exception ex)
                         {
                             Console.WriteLine(ex.Message);
                         }
                         break;
-
                     case "нет":
-                        return;
-
-                    default:
-                        break;
+                        return;                    
                 }
             }
         }
 
-
         /// <summary>
-        /// TODO:
+        /// ввод треугольник с консоли
         /// </summary>
-        /// <param name="line"></param>
-        /// <returns></returns>
-        private static FigureBase FigureWithConsole(string line)
+        /// <returns>треугольник</returns>
+        private static Triangle TriangleTohConsole()
         {
-            
-            FigureBase figureBase;
-            switch (line)
+            List<double> numbers = new List<double>();
+            var trianglePhrasesListTmp = new List<string>()
             {
-                case "треугольник":
-                    List<double> numbers = new List<double>();
-                    while (true)
-                    {
-                        for (int i = 0; i < GetPhrasesToConsole.GetList(line).Count; i++)
-                        {
+                "Введите А",  "Введите Б",  "Введите С"
+            };
+            var action = new Action(() => numbers.Add(FigureBase.CheckSize(
+                               Convert.ToDouble(СhekValue(Console.ReadLine())))));
 
-                            while (true)
-                            {
-                                try
-                                {
-                                    Console.WriteLine(GetPhrasesToConsole.GetList(line)[i]);                                           
-                                    numbers.Add(FigureBase.CheckSize(
-                                        Convert.ToDouble(СhekValue(Console.ReadLine()))));
-                                    break;
+            while (true)
+            {
+                foreach (var phrase in trianglePhrasesListTmp)
+                {
+                    InvokeAciton(phrase, action);
+                }
 
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine(ex.Message);
-                                }
-                            }
-                        }
-                        try
-                        {
-                            Triangle triangle = new Triangle(numbers[0], numbers[1], numbers[2]);
-                            figureBase = triangle;
-                            break;
-                        }
-                        catch(Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
-                    }
-                    
-                    break;
-
-                case "прямоугольник":
-                    Rectangle rectangle = new Rectangle();
-                    for (int i = 0; i < GetPhrasesToConsole.GetList(line).Count; i++)
-                    {
-                        while (true)
-                        {
-                            try
-                            {
-                                Console.WriteLine(GetPhrasesToConsole.GetList(line)[i]);
-                                switch (i)
-                                {
-                                    case 0:
-                                        rectangle.Length = Convert.ToDouble(Console.ReadLine());
-                                        break;
-                                    case 1:
-                                        rectangle.Width = Convert.ToDouble(Console.ReadLine());
-                                        break;
-                                }
-                                break;
-                            }
-                            catch(Exception ex)
-                            {
-                                Console.WriteLine(ex.Message);
-                            }
-                        }
-                    }
-                    figureBase = rectangle;
-                    break;
-
-
-                case "окружность":
-                    Circle circle = new Circle();
-                    while (true)
-                    {
-                        try
-                        {
-                            Console.WriteLine(GetPhrasesToConsole.GetList(line)[0]);
-                            circle.Radius = Convert.ToDouble(Console.ReadLine());
-                            break;
-                        }
-                        catch(Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
-                        
-                    }
-                    figureBase = circle;
-                    break;
-
-                default:
-                    throw new Exception("Необходимо ввести фигуру из предложенных");
+                try
+                {
+                    return new Triangle(numbers[0], numbers[1], numbers[2]);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
-            return figureBase;
         }
+
         /// <summary>
-        /// TODO:
+        /// ввод прямоугольника с консоли
         /// </summary>
-        /// <param name="line"></param>
+        /// <returns>прямоугольник</returns>
+        private static Rectangle RectangleTohConsole()
+        {
+            Rectangle rectangle = new Rectangle();
+            var rectangleActionPhrasesList = new List<Tuple<string, Action>>()
+            {
+                new Tuple<string, Action> ("Введите длину", new Action (() => 
+                    rectangle.Length = Convert.ToDouble(СhekValue(Console.ReadLine())))),
+                new Tuple<string, Action>("Введите ширину", new Action (() => 
+                    rectangle.Width = Convert.ToDouble(СhekValue(Console.ReadLine()))))
+            };
+            foreach (var tmpAction in rectangleActionPhrasesList)
+            {
+                InvokeAciton(tmpAction.Item1, tmpAction.Item2);
+            }
+            return rectangle;
+        }
+
+        /// <summary>
+        /// ввод окружности с консоли
+        /// </summary>
+        /// <returns>окружность</returns>
+        private static Circle CircleTohConsole()
+        {
+            Circle circle = new Circle();
+            InvokeAciton("введите радиус",
+                new Action(() => circle.Radius = Convert.ToDouble(СhekValue(Console.ReadLine()))));
+            return circle;
+        }
+
+        /// <summary>
+        /// выполнение действий и выведение фраз н аконсоль
+        /// </summary>
+        /// <param name="message">фраза</param>
+        /// <param name="action">действие</param>
+        public static void InvokeAciton(string message, Action action)
+        {
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine(message);                                           
+                    action.Invoke();
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// проверяем входную строку на возможность преобразования в число
+        /// </summary>
+        /// <param name="line">входная строка с консоли</param>
         public static string СhekValue(string line)
         {
-            int number;
-            bool isParsed = Int32.TryParse(line, out number);
+            double number;
+            bool isParsed = Double.TryParse(line, out number);
             if (!isParsed)
             {
                 throw new Exception("Необходимо ввести числовое значение");
@@ -170,7 +161,5 @@ namespace Лабораторная_3
                 return line;
             }
         }
-
-    }
-    
+    }   
 }
