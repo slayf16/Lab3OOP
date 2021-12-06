@@ -27,6 +27,7 @@ namespace View
         /// </summary>
         private FigureType _figureType;
        
+        //TODO: убрать.
         /// <summary>
         /// Объявление родительской формы
         /// </summary>
@@ -37,6 +38,7 @@ namespace View
         /// </summary>
         public Form2()
         {
+            //TODO: передать список для поиска в конструктор
             InitializeComponent();            
             FormAction();
         }
@@ -47,6 +49,7 @@ namespace View
         private void FormAction()
         {
             _textBoxes.Clear();
+            //TODO: RSDN
             if (radioButton1.Checked == true)
             {
                 _figureType = FigureType.Triangle;
@@ -77,7 +80,8 @@ namespace View
         /// <param name="forButton2">положение кнопки отмена</param>
         /// <param name="indexCountSide">количество сторон определяющих фигуру</param>
         /// <param name="nameSide">название стороны фигруы показываемое на экране</param>
-        private void CreateElementsforForm(int heightForm, int widthGrouBox, int heightGroupBox, string nameTypeFigure,
+        private void CreateElementsforForm(int heightForm, int widthGrouBox, 
+            int heightGroupBox, string nameTypeFigure,
             Point forButton1, Point  forButton2, int indexCountSide, string nameSide)
         {
             this.Width = 255;
@@ -101,7 +105,8 @@ namespace View
                 labels[i].Location = new Point(5, (i + 1) * 35); 
                 labels[i].Text = nameSide+(i+1);
                 _textBoxes[i].Location = new Point(60, (i + 1) * 33);
-                _textBoxes[i].KeyPress += textBox_KeyPress;// плюс равно говорит что мы обрабатываем кей пресс событие обрабатывается методом 
+                // плюс равно говорит что мы обрабатываем кей пресс событие обрабатывается методом 
+                _textBoxes[i].KeyPress += textBox_KeyPress;
             }
         }
 
@@ -142,6 +147,7 @@ namespace View
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
@@ -156,7 +162,7 @@ namespace View
             try
             {
                 FigureBase figure = GetFigure(_figureType);
-                parent.AddFigureeRow(figure.GetName(), figure.GetInfo());
+                //parent.AddFigureeRow(figure.GetName(), figure.GetInfo());
                 this.Close();
             }
             catch(Exception ex)

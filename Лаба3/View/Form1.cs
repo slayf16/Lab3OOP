@@ -64,7 +64,7 @@ namespace View
         /// </summary>
         /// <param name="figureName">имя фигуры</param>
         /// <param name="figureInfo">параметры фигуры</param>
-        public void AddFigureeRow(string figureName, string figureInfo)
+        private void AddFigureeRow(string figureName, string figureInfo)
         {
 
             FigureList.Add(new DataGridFigureRow()
@@ -141,6 +141,7 @@ namespace View
             }
             else
             {
+                //TODO: RSDN
                 if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
                     return;
                 WorkIWithFile.SaveFile(saveFileDialog1.FileName, FigureList);
@@ -178,13 +179,15 @@ namespace View
         {
             if(FigureList.Count!=0)
             {
-                DialogResult dialog = MessageBox.Show("вы действительно хотите выйти?", "завершение работы", 
+                DialogResult dialog = MessageBox.Show("вы действительно хотите выйти?", 
+                    "завершение работы", 
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                
+                //TODO: switch-case
                 if(dialog == DialogResult.Yes)
                 {
                     e.Cancel = false;
-                }
-                if(dialog == DialogResult.No)
+                } else if(dialog == DialogResult.No)
                 {
                     e.Cancel = true;
                 }

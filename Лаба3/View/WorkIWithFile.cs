@@ -38,15 +38,12 @@ namespace View
         {
             try
             {
-                System.ComponentModel.BindingList<DataGridFigureRow> data = new
-                    System.ComponentModel.BindingList<DataGridFigureRow>();
-
                 var reader = new System.Xml.Serialization.XmlSerializer(typeof
                     (System.ComponentModel.BindingList<DataGridFigureRow>));
 
                 var file = new System.IO.StreamReader(path);
-                data = (System.ComponentModel.BindingList<DataGridFigureRow>)reader.Deserialize(file);
-                return data;
+                var loadedData = (System.ComponentModel.BindingList<DataGridFigureRow>)reader.Deserialize(file);
+                return loadedData;
             }
             catch(Exception ex)
             {
