@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryForGeometry;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,7 +21,7 @@ namespace View
         /// <summary>
         /// поле перечисления для создания фигур нужного типа
         /// </summary>
-      //  private FigureType _figureType;
+        private FigureType _figureType;
 
         /// <summary>
         /// Объявление родительской формы
