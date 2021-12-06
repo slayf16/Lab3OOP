@@ -18,6 +18,8 @@ namespace LibraryForGeometry
         /// <returns>возвращает площадь фигуры</returns>
         public abstract double Square();
 
+
+
         /// <summary>
         /// метод для проверки полей
         /// </summary>
@@ -35,5 +37,17 @@ namespace LibraryForGeometry
                 return number;
             }
         }
+
+        /// <summary>
+        /// метод для получения информации о фигуре
+        /// </summary>
+        /// <returns></returns>
+        public abstract string GetInfo();
+
+        /// <summary>
+        /// метод для выявления названия типа фигуры
+        /// </summary>
+        /// <returns>строка с информацией о типе фигуры</returns>
+        public abstract string GetName();
     }
 }
