@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -40,20 +41,29 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dataGridFigureRowBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.figurePropsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.figureNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridFigureRowBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.figurePropsDataGridViewTextBoxColumn,
+            this.figureNameDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.dataGridFigureRowBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 18);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(262, 160);
+            this.dataGridView1.Size = new System.Drawing.Size(357, 209);
             this.dataGridView1.TabIndex = 0;
             // 
             // button1
@@ -94,6 +104,7 @@
             this.button4.TabIndex = 4;
             this.button4.Text = "Random";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // openFileDialog1
             // 
@@ -122,24 +133,46 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.loadToolStripMenuItem.Text = "Load";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Location = new System.Drawing.Point(71, 27);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(268, 181);
+            this.groupBox1.Size = new System.Drawing.Size(363, 230);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            // 
+            // dataGridFigureRowBindingSource
+            // 
+            this.dataGridFigureRowBindingSource.DataSource = typeof(View.DataGridFigureRow);
+            // 
+            // figurePropsDataGridViewTextBoxColumn
+            // 
+            this.figurePropsDataGridViewTextBoxColumn.DataPropertyName = "FigureProps";
+            this.figurePropsDataGridViewTextBoxColumn.HeaderText = "FigureProps";
+            this.figurePropsDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.figurePropsDataGridViewTextBoxColumn.Name = "figurePropsDataGridViewTextBoxColumn";
+            this.figurePropsDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // figureNameDataGridViewTextBoxColumn
+            // 
+            this.figureNameDataGridViewTextBoxColumn.DataPropertyName = "FigureName";
+            this.figureNameDataGridViewTextBoxColumn.HeaderText = "FigureName";
+            this.figureNameDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.figureNameDataGridViewTextBoxColumn.Name = "figureNameDataGridViewTextBoxColumn";
+            this.figureNameDataGridViewTextBoxColumn.Width = 125;
             // 
             // FigureForm
             // 
@@ -160,6 +193,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridFigureRowBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,6 +213,9 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn figurePropsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn figureNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource dataGridFigureRowBindingSource;
     }
 }
 

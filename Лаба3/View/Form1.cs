@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryForGeometry;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -95,6 +96,68 @@ namespace View
             Form3 form3 = new Form3();
             form3.ParentForm = this;
             form3.ShowDialog(this);
+        }
+
+
+        /// <summary>
+        /// кнопка для формирования рандомных данных
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button4_Click(object sender, EventArgs e)
+        {
+            FigureBase figure = FigureRandom.GetRandomFigure();
+            AddFigureeRow(figure.GetName(), figure.GetInfo());
+        }
+
+
+        /// <summary>
+        /// метод для выделения найденных объектов
+        /// </summary>
+        /// <param name="index"></param>
+        public void SelectRow(List<int> index)
+        {
+            dataGridView1.ClearSelection();
+            for (int i = 0; i < index.Count(); i++)
+            {
+                dataGridView1.Rows[index[i]].Selected = true;
+            }
+        }
+
+
+
+        /// <summary>
+        /// кнопка сохранения данных в файл
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FigureList.Count == 0)
+            {
+                MessageBox.Show("Отсутствуют данные для сохранения");
+            }
+            else
+            {
+                if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+                    return;
+                WorkIWithFile.SaveFile(saveFileDialog1.FileName, FigureList);
+            }
+        }
+
+        /// <summary>
+        /// кнопка для загрузки данных из файла
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FigureList.Clear();
+            if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            FigureList = WorkIWithFile.LoadFile(openFileDialog1.FileName);
+            dataGridView1.DataSource = FigureList;
+
         }
     }
 }
