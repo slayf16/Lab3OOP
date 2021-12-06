@@ -55,5 +55,46 @@ namespace View
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.DataSource = FigureList;
         }
+
+
+        /// <summary>
+        /// метод для добавления элемента в список данных и экран
+        /// </summary>
+        /// <param name="figureName">имя фигуры</param>
+        /// <param name="figureInfo">параметры фигуры</param>
+        public void AddFigureeRow(string figureName, string figureInfo)
+        {
+
+            FigureList.Add(new DataGridFigureRow()
+            {
+                FigureName = figureName,
+                FigureProps = figureInfo
+            });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (FigureList.Count == 0)
+            {
+                MessageBox.Show("Список пустой");
+            }
+            else
+            {
+                int delet = dataGridView1.SelectedCells[0].RowIndex;
+                dataGridView1.Rows.RemoveAt(delet);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form3 form3 = new Form3();
+            form3.ParentForm = this;
+            form3.ShowDialog(this);
+        }
     }
 }
