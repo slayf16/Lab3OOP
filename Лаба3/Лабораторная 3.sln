@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Лабораторная 3", "Лабораторная 3\Лабораторная 3.csproj", "{63E4B2BD-CCD9-4B80-A3F3-67B4C56D6E9B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryForGeometry", "LibraryForGeometry\LibraryForGeometry.csproj", "{2AA78637-3E83-4B34-9AA1-0D479975F5EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", "{2369D170-011E-41AB-970B-6D4839EAEE2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{63E4B2BD-CCD9-4B80-A3F3-67B4C56D6E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{63E4B2BD-CCD9-4B80-A3F3-67B4C56D6E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{63E4B2BD-CCD9-4B80-A3F3-67B4C56D6E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{63E4B2BD-CCD9-4B80-A3F3-67B4C56D6E9B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2AA78637-3E83-4B34-9AA1-0D479975F5EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2AA78637-3E83-4B34-9AA1-0D479975F5EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AA78637-3E83-4B34-9AA1-0D479975F5EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AA78637-3E83-4B34-9AA1-0D479975F5EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2369D170-011E-41AB-970B-6D4839EAEE2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2369D170-011E-41AB-970B-6D4839EAEE2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2369D170-011E-41AB-970B-6D4839EAEE2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2369D170-011E-41AB-970B-6D4839EAEE2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
