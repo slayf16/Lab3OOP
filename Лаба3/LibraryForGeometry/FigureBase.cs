@@ -18,7 +18,7 @@ namespace LibraryForGeometry
         /// <returns>возвращает площадь фигуры</returns>
         public abstract double Square();
 
-
+    
 
         /// <summary>
         /// метод для проверки полей

@@ -35,7 +35,7 @@ namespace View
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-
+            
             if (textBox1.Text == "")
             {
                 MessageBox.Show("введите условия для выполнения поиска");

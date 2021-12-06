@@ -19,10 +19,10 @@ namespace LibraryForGeometry
         {
             Random _randomizer = new Random();
             FigureBase figure = null;
-            switch (_randomizer.Next(1, 4))
+            switch(_randomizer.Next(1,4))
             {
                 case 1:
-                    Circle circle = new Circle(_randomizer.Next(1, 100));
+                    Circle circle = new Circle(_randomizer.Next(1,100));
                     figure = circle;
                     break;
 

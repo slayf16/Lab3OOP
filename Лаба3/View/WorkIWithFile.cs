@@ -36,15 +36,22 @@ namespace View
         /// <returns>Возвращает загруженный список</returns>
         public static System.ComponentModel.BindingList<DataGridFigureRow> LoadFile(string path)
         {
-            System.ComponentModel.BindingList<DataGridFigureRow> data = new
-                System.ComponentModel.BindingList<DataGridFigureRow>();
+            try
+            {
+                System.ComponentModel.BindingList<DataGridFigureRow> data = new
+                    System.ComponentModel.BindingList<DataGridFigureRow>();
 
-            var reader = new System.Xml.Serialization.XmlSerializer(typeof
-                (System.ComponentModel.BindingList<DataGridFigureRow>));
+                var reader = new System.Xml.Serialization.XmlSerializer(typeof
+                    (System.ComponentModel.BindingList<DataGridFigureRow>));
 
-            var file = new System.IO.StreamReader(path);
-            data = (System.ComponentModel.BindingList<DataGridFigureRow>)reader.Deserialize(file);
-            return data;
+                var file = new System.IO.StreamReader(path);
+                data = (System.ComponentModel.BindingList<DataGridFigureRow>)reader.Deserialize(file);
+                return data;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("неверная структура");
+            }
         }
     }
 }

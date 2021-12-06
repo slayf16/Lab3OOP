@@ -9,8 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace View
 {
+    /// <summary>
+    /// форма для добавления фигур в список данных
+    /// </summary>
     public partial class Form2 : Form
     {
         /// <summary>
@@ -22,15 +26,18 @@ namespace View
         /// поле перечисления для создания фигур нужного типа
         /// </summary>
         private FigureType _figureType;
-
+       
         /// <summary>
         /// Объявление родительской формы
         /// </summary>
         public FigureForm ParentForm { get; set; }
 
+        /// <summary>
+        /// конструктор формы
+        /// </summary>
         public Form2()
         {
-            InitializeComponent();
+            InitializeComponent();            
             FormAction();
         }
 
@@ -43,19 +50,19 @@ namespace View
             if (radioButton1.Checked == true)
             {
                 _figureType = FigureType.Triangle;
-                CreateElementsforForm(270, 170, 130, "Triangle", new Point(22, 190), new Point(130, 190), 3, "side");
+                CreateElementsforForm(270, 170, 130, "Triangle", new Point(22, 190), new Point(130, 190),3,"side");                
             }
 
             else if (radioButton2.Checked == true)
             {
                 _figureType = FigureType.Circle;
-                CreateElementsforForm(200, 170, 70, "Circle", new Point(22, 125), new Point(130, 125), 1, "radius");
+                CreateElementsforForm(200, 170, 70, "Circle", new Point(22, 125), new Point(130, 125),1,"radius");
             }
 
             else if (radioButton3.Checked == true)
             {
                 _figureType = FigureType.Rectangle;
-                CreateElementsforForm(230, 170, 100, "Rectangle", new Point(22, 155), new Point(130, 155), 2, "side");
+                CreateElementsforForm(230, 170, 100, "Rectangle", new Point(22, 155), new Point(130, 155),2,"side");
             }
         }
 
@@ -71,7 +78,7 @@ namespace View
         /// <param name="indexCountSide">количество сторон определяющих фигуру</param>
         /// <param name="nameSide">название стороны фигруы показываемое на экране</param>
         private void CreateElementsforForm(int heightForm, int widthGrouBox, int heightGroupBox, string nameTypeFigure,
-            Point forButton1, Point forButton2, int indexCountSide, string nameSide)
+            Point forButton1, Point  forButton2, int indexCountSide, string nameSide)
         {
             this.Width = 255;
             this.Height = heightForm;
@@ -88,28 +95,18 @@ namespace View
                 labels.Add(new Label());
                 _textBoxes.Add(new TextBox());
                 groupBox1.Controls.Add(labels[i]);
-                groupBox1.Controls.Add(_textBoxes[i]);
+                groupBox1.Controls.Add(_textBoxes[i]);                
                 labels[i].Width = 46;
                 labels[i].Height = 17;
-                labels[i].Location = new Point(5, (i + 1) * 35);
-                labels[i].Text = nameSide + (i + 1);
+                labels[i].Location = new Point(5, (i + 1) * 35); 
+                labels[i].Text = nameSide+(i+1);
                 _textBoxes[i].Location = new Point(60, (i + 1) * 33);
                 _textBoxes[i].KeyPress += textBox_KeyPress;// плюс равно говорит что мы обрабатываем кей пресс событие обрабатывается методом 
             }
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            FormAction();
-        }
-
-        /// <summary>
-        /// 
+        /// метод для обновления формы при взаимодействии с чек 2
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -119,7 +116,7 @@ namespace View
         }
 
         /// <summary>
-        /// 
+        /// метод для обновления формы при взаимодействии с чеком 3
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -129,7 +126,17 @@ namespace View
         }
 
         /// <summary>
-        /// 
+        /// метод для обновления формы при взаимодействии с чекбоксом 1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            FormAction();
+        }
+
+        /// <summary>
+        /// Событие, при нажатии кнопки отмена
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -138,6 +145,11 @@ namespace View
             this.Close();
         }
 
+        /// <summary>
+        /// Событие, при нажатии кнопки ОК
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             var parent = this.ParentForm as FigureForm;
@@ -147,10 +159,11 @@ namespace View
                 parent.AddFigureeRow(figure.GetName(), figure.GetInfo());
                 this.Close();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        
         }
 
         /// <summary>
@@ -180,11 +193,11 @@ namespace View
             List<double> paramsFigure = GetFigureParams();
             switch (type)
             {
-                case FigureType.Triangle:
+                case FigureType.Triangle:                                        
                     figure = new Triangle(paramsFigure[0], paramsFigure[1], paramsFigure[2]);
                     break;
 
-                case FigureType.Rectangle:
+                case FigureType.Rectangle:                         
                     figure = new LibraryForGeometry.Rectangle(paramsFigure[0], paramsFigure[1]);
                     break;
 
@@ -192,7 +205,7 @@ namespace View
                     figure = new Circle(paramsFigure[0]);
                     break;
             }
-            return figure;
+            return figure;                                                  
         }
 
         /// <summary>
@@ -202,7 +215,7 @@ namespace View
         private List<double> GetFigureParams()
         {
             List<double> figureParams = new List<double>();
-            foreach (var textbox in _textBoxes)
+            foreach(var textbox in _textBoxes)
             {
                 figureParams.Add(Convert.ToDouble(textbox.Text));
             }

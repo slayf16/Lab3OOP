@@ -22,5 +22,4 @@ namespace View
         public string FigureName { get; set; }
 
     }
-
 }

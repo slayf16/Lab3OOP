@@ -28,9 +28,11 @@ namespace View
         public FigureForm()
         {
             InitializeComponent();
+
             #if !DEBUG
             button4.Visible = false;            
             #endif
+
         }
 
         /// <summary>
@@ -40,11 +42,11 @@ namespace View
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
+
             Form2 form2 = new Form2();
             form2.ParentForm = this;
-            form2.ShowDialog(this);
+            form2.ShowDialog(this);          
         }
-
 
         /// <summary>
         /// метод для связи datagrid с полем параметров
@@ -56,7 +58,6 @@ namespace View
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.DataSource = FigureList;
         }
-
 
         /// <summary>
         /// метод для добавления элемента в список данных и экран
@@ -70,11 +71,11 @@ namespace View
             {
                 FigureName = figureName,
                 FigureProps = figureInfo
-            });
+            }) ;
         }
 
         /// <summary>
-        /// 
+        /// кнопка для удаления выделенного элемента
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -91,13 +92,17 @@ namespace View
             }
         }
 
+        /// <summary>
+        /// кнопка для вызова формы поиска
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
             Form3 form3 = new Form3();
             form3.ParentForm = this;
             form3.ShowDialog(this);
         }
-
 
         /// <summary>
         /// кнопка для формирования рандомных данных
@@ -110,21 +115,18 @@ namespace View
             AddFigureeRow(figure.GetName(), figure.GetInfo());
         }
 
-
         /// <summary>
         /// метод для выделения найденных объектов
         /// </summary>
         /// <param name="index"></param>
         public void SelectRow(List<int> index)
-        {
+        {                        
             dataGridView1.ClearSelection();
             for (int i = 0; i < index.Count(); i++)
             {
                 dataGridView1.Rows[index[i]].Selected = true;
-            }
+            }           
         }
-
-
 
         /// <summary>
         /// кнопка сохранения данных в файл
@@ -152,12 +154,41 @@ namespace View
         /// <param name="e"></param>
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FigureList.Clear();
-            if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
-                return;
-            FigureList = WorkIWithFile.LoadFile(openFileDialog1.FileName);
-            dataGridView1.DataSource = FigureList;
+            try
+            {
+                FigureList.Clear();
+                if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
+                    return;
+                FigureList = WorkIWithFile.LoadFile(openFileDialog1.FileName);
+                dataGridView1.DataSource = FigureList;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
+        }
+
+        /// <summary>
+        /// Уточнение завершения работы с программой, если  имеются не пустые данные
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FigureForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(FigureList.Count!=0)
+            {
+                DialogResult dialog = MessageBox.Show("вы действительно хотите выйти?", "завершение работы", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(dialog == DialogResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                if(dialog == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
         }
     }
 }

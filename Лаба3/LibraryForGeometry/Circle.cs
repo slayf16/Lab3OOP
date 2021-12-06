@@ -26,8 +26,8 @@ namespace LibraryForGeometry
                 return _radius;
             }
             set
-            {
-                _radius = CheckSize(value);
+            {                               
+                _radius = CheckSize(value);                
             }
         }
 
@@ -35,12 +35,12 @@ namespace LibraryForGeometry
         /// Площаадь, если задан радиус
         /// </summary>
         /// <returns>Площадь окружности</returns>
-        public override double Square()
+        public override double Square ()
         {
 
             return Math.PI * Radius * Radius;
-        }
-
+        }        
+  
         /// <summary>
         /// Конструктор класса 
         /// </summary>
@@ -62,7 +62,7 @@ namespace LibraryForGeometry
         public override string GetInfo()
         {
             return $"Radius: {_radius}. "
-                + $"Square: {Math.Round(this.Square(), 2)}";
+                + $"Square: {Math.Round(this.Square(),2)}";
         }
 
         /// <summary>

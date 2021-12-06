@@ -26,8 +26,8 @@ namespace LibraryForGeometry
                 return _length;
             }
             set
-            {
-                _length = CheckSize(value);
+            {                               
+                _length = CheckSize(value);                
             }
         }
 
@@ -47,10 +47,10 @@ namespace LibraryForGeometry
             }
             set
             {
-                _width = CheckSize(value);
+                _width = CheckSize(value);                
             }
-        }
-
+        }      
+             
         /// <summary>
         ///  Площадь прямоугольника
         /// </summary>
@@ -65,7 +65,7 @@ namespace LibraryForGeometry
         /// </summary>
         /// <param name="length">длина</param>
         /// <param name="width">ширина</param>
-        public Rectangle(double length, double width)
+        public Rectangle (double length, double width)
         {
             Length = length;
             Width = width;
@@ -83,8 +83,8 @@ namespace LibraryForGeometry
         public override string GetInfo()
         {
             return $"Length: {_length}, "
-                + $"Width: {_width}. "
-                + $"Square: {Math.Round(this.Square(), 2)}";
+                + $"Width: {_width}. "                
+                + $"Square: {Math.Round(this.Square(),2)}";
         }
 
         /// <summary>
