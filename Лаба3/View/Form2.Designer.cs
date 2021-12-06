@@ -39,7 +39,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(55, 40);
+            this.radioButton1.Location = new System.Drawing.Point(20, 40);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(110, 21);
             this.radioButton1.TabIndex = 0;
@@ -51,7 +51,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(186, 40);
+            this.radioButton2.Location = new System.Drawing.Point(136, 40);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(110, 21);
             this.radioButton2.TabIndex = 1;
@@ -63,7 +63,7 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(302, 40);
+            this.radioButton3.Location = new System.Drawing.Point(252, 40);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(110, 21);
             this.radioButton3.TabIndex = 2;
@@ -74,9 +74,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Location = new System.Drawing.Point(96, 112);
+            this.groupBox1.Location = new System.Drawing.Point(20, 67);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 100);
+            this.groupBox1.Size = new System.Drawing.Size(342, 169);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
@@ -93,7 +93,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(286, 273);
+            this.button2.Location = new System.Drawing.Point(232, 273);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 5;
@@ -105,7 +105,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(429, 368);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);

@@ -152,5 +152,61 @@ namespace View
                 MessageBox.Show(ex.Message);
             }
         }
+
+        /// <summary>
+        /// обработчик взаимодействия с текстбоксами (валидация данных)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+
+            if (!Char.IsDigit(number) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+
+        }
+
+        /// <summary>
+        /// Создание фигуры с введенными пользователем параметрами
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns>возвращает фигуру нужного типа</returns>
+        private FigureBase GetFigure(FigureType type)
+        {
+            FigureBase figure = null;
+            List<double> paramsFigure = GetFigureParams();
+            switch (type)
+            {
+                case FigureType.Triangle:
+                    figure = new Triangle(paramsFigure[0], paramsFigure[1], paramsFigure[2]);
+                    break;
+
+                case FigureType.Rectangle:
+                    figure = new LibraryForGeometry.Rectangle(paramsFigure[0], paramsFigure[1]);
+                    break;
+
+                case FigureType.Circle:
+                    figure = new Circle(paramsFigure[0]);
+                    break;
+            }
+            return figure;
+        }
+
+        /// <summary>
+        /// метод для считывания параметров с экрана 
+        /// </summary>
+        /// <returns>возвращает массив числовых параметров фигуры</returns>
+        private List<double> GetFigureParams()
+        {
+            List<double> figureParams = new List<double>();
+            foreach (var textbox in _textBoxes)
+            {
+                figureParams.Add(Convert.ToDouble(textbox.Text));
+            }
+            return figureParams;
+        }
     }
 }
