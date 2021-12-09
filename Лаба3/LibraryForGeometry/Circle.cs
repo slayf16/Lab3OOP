@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryForGeometry
 {
+    [Serializable]
     /// <summary>
     /// окружность
     /// </summary>

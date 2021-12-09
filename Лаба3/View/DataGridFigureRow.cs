@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryForGeometry;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace View
     /// </summary>
     public class DataGridFigureRow
     {
+
         /// <summary>
         /// переменная для записи параметров фигуры
         /// </summary>

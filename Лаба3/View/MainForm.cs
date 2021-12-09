@@ -16,11 +16,19 @@ namespace View
     /// </summary>
     public partial class FigureForm : Form
     {
+
         /// <summary>
         /// Лист для данных
         /// </summary>
         public BindingList<DataGridFigureRow> FigureList =
             new BindingList<DataGridFigureRow>();
+
+        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<FigureBase> Figures = new List<FigureBase>(); 
 
         /// <summary>
         /// конструктор формы
@@ -40,12 +48,15 @@ namespace View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
+        private void AddFigureButton(object sender, EventArgs e)
         {
-
-            Form2 form2 = new Form2();
-            form2.ParentForm = this;
-            form2.ShowDialog(this);          
+            AddForm form2 = new AddForm();
+            form2.ShowDialog();
+            if(form2.DialogResult == DialogResult.OK)
+            {
+                Figures.Add(form2.figure);
+                AddFigureeRow(form2.figure.GetName(), form2.figure.GetInfo());
+            }            
         }
 
         /// <summary>
@@ -64,7 +75,7 @@ namespace View
         /// </summary>
         /// <param name="figureName">имя фигуры</param>
         /// <param name="figureInfo">параметры фигуры</param>
-        private void AddFigureeRow(string figureName, string figureInfo)
+        public void AddFigureeRow(string figureName, string figureInfo)
         {
 
             FigureList.Add(new DataGridFigureRow()
@@ -79,7 +90,7 @@ namespace View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
+        private void RemoveFigureButton(object sender, EventArgs e)
         {
             if (FigureList.Count == 0)
             {
@@ -89,6 +100,7 @@ namespace View
             {
                 int delet = dataGridView1.SelectedCells[0].RowIndex;
                 dataGridView1.Rows.RemoveAt(delet);
+                Figures.RemoveAt(delet);
             }
         }
 
@@ -97,11 +109,17 @@ namespace View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button3_Click(object sender, EventArgs e)
+        private void SearchButton(object sender, EventArgs e)
         {
-            Form3 form3 = new Form3();
-            form3.ParentForm = this;
-            form3.ShowDialog(this);
+            List<int> indexFofSearch = new List<int>();
+            SearchForm form3 = new SearchForm(FigureList);
+            form3.ShowDialog();
+            if (form3.DialogResult == DialogResult.OK)
+            {
+                indexFofSearch = form3.IndexforSearch;
+                SelectRow(indexFofSearch);
+
+            }
         }
 
         /// <summary>
@@ -109,9 +127,10 @@ namespace View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button4_Click(object sender, EventArgs e)
+        private void RandomFigureButton(object sender, EventArgs e)
         {
             FigureBase figure = FigureRandom.GetRandomFigure();
+            Figures.Add(figure);
             AddFigureeRow(figure.GetName(), figure.GetInfo());
         }
 
@@ -133,7 +152,7 @@ namespace View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveButtonMenuStrip(object sender, EventArgs e)
         {
             if (FigureList.Count == 0)
             {
@@ -141,10 +160,12 @@ namespace View
             }
             else
             {
-                //TODO: RSDN
+                //TODO: RSDN+
                 if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+                {
                     return;
-                WorkIWithFile.SaveFile(saveFileDialog1.FileName, FigureList);
+                }
+                Loader.SaveFile(saveFileDialog1.FileName, Figures);
             }
         }
 
@@ -153,14 +174,23 @@ namespace View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoadButtonMenuStrip(object sender, EventArgs e)
         {
             try
             {
+                Figures.Clear();
                 FigureList.Clear();
                 if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                     return;
-                FigureList = WorkIWithFile.LoadFile(openFileDialog1.FileName);
+                Figures = Loader.LoadFile(openFileDialog1.FileName);
+                foreach (FigureBase figureBase in Figures)
+                {
+                    FigureList.Add(new DataGridFigureRow()
+                    {
+                        FigureName = figureBase.GetName(),
+                        FigureProps = figureBase.GetInfo(),
+                    });
+                }
                 dataGridView1.DataSource = FigureList;
             }
             catch(Exception ex)
@@ -182,14 +212,16 @@ namespace View
                 DialogResult dialog = MessageBox.Show("вы действительно хотите выйти?", 
                     "завершение работы", 
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                
-                //TODO: switch-case
-                if(dialog == DialogResult.Yes)
+
+                //TODO: switch-case+
+                switch (dialog)
                 {
-                    e.Cancel = false;
-                } else if(dialog == DialogResult.No)
-                {
-                    e.Cancel = true;
+                    case DialogResult.Yes:
+                        e.Cancel = false;
+                        break;
+                    case DialogResult.No:
+                        e.Cancel = true;
+                        break;
                 }
             }
         }

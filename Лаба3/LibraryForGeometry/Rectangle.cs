@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace LibraryForGeometry
 {
+    [Serializable]
     /// <summary>
     /// прямоугольник
     /// </summary>
     public class Rectangle : FigureBase
     {
+
         /// <summary>
         /// поле для длины
         /// </summary>

@@ -13,19 +13,21 @@ namespace View
     /// <summary>
     /// форма для выполнения поиска данных
     /// </summary>
-    public partial class Form3 : Form
+    public partial class SearchForm : Form
     {
-        /// <summary>
-        /// поле для назначения родительской формы
-        /// </summary>
-        public FigureForm ParentForm { get; set; }
+        private BindingList<DataGridFigureRow> datas = new BindingList<DataGridFigureRow>();
+
+        public List<int> IndexforSearch { get; set; }
+
+        
 
         /// <summary>
         /// конструктор формы
         /// </summary>
-        public Form3()
+        public SearchForm(BindingList<DataGridFigureRow> datas)
         {
             InitializeComponent();
+            this.datas = datas;
         }
 
         /// <summary>
@@ -44,8 +46,7 @@ namespace View
             {
                 List<int> index = new List<int>();
                 int i = 0;
-                var parent = this.ParentForm as FigureForm;
-                foreach (DataGridFigureRow str in parent.FigureList)
+                foreach (DataGridFigureRow str in datas)
                 {
                     if (str.FigureName.Contains(textBox1.Text) ||
                         str.FigureProps.Contains(textBox1.Text))
@@ -54,8 +55,9 @@ namespace View
                     }
                     i++;
                 }
-                parent.SelectRow(index);
+                IndexforSearch = index;
                 this.Close();
+                this.DialogResult = DialogResult.OK;
             }
         }
 

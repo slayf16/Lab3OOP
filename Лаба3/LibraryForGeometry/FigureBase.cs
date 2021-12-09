@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace LibraryForGeometry
 {
+    [Serializable]
     /// <summary>
     /// абстрактная фигура
     /// </summary>
