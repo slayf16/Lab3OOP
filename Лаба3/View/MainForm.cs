@@ -54,8 +54,8 @@ namespace View
             form2.ShowDialog();
             if(form2.DialogResult == DialogResult.OK)
             {
-                Figures.Add(form2.figure);
-                AddFigureeRow(form2.figure.GetName(), form2.figure.GetInfo());
+                Figures.Add(form2.Figure);
+                AddFigureeRow(form2.Figure.GetName(), form2.Figure.GetInfo());
             }            
         }
 
@@ -94,7 +94,8 @@ namespace View
         {
             if (FigureList.Count == 0)
             {
-                MessageBox.Show("Список пустой");
+                MessageBox.Show("Список пустой","информация",MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
             else
             {
@@ -156,7 +157,8 @@ namespace View
         {
             if (FigureList.Count == 0)
             {
-                MessageBox.Show("Отсутствуют данные для сохранения");
+                MessageBox.Show("Отсутствуют данные для сохранения","Информация",
+                    MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
             else
             {
@@ -178,10 +180,13 @@ namespace View
         {
             try
             {
+
+                if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
+                {
+                    return;
+                }
                 Figures.Clear();
                 FigureList.Clear();
-                if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
-                    return;
                 Figures = Loader.LoadFile(openFileDialog1.FileName);
                 foreach (FigureBase figureBase in Figures)
                 {
@@ -195,7 +200,8 @@ namespace View
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
 
         }

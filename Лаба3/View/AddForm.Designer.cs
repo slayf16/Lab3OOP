@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.RectangleRadioButton = new System.Windows.Forms.RadioButton();
+            this.CircleRadioButton = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.TriangleRadioButton = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -47,27 +47,27 @@
             // 
             // radioButton3
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(195, 29);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(93, 21);
-            this.radioButton3.TabIndex = 1;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Rectangle";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.RectangleElementsOnFormRadioButton);
+            this.RectangleRadioButton.AutoSize = true;
+            this.RectangleRadioButton.Location = new System.Drawing.Point(195, 29);
+            this.RectangleRadioButton.Name = "radioButton3";
+            this.RectangleRadioButton.Size = new System.Drawing.Size(93, 21);
+            this.RectangleRadioButton.TabIndex = 1;
+            this.RectangleRadioButton.TabStop = true;
+            this.RectangleRadioButton.Text = "Rectangle";
+            this.RectangleRadioButton.UseVisualStyleBackColor = true;
+            this.RectangleRadioButton.CheckedChanged += new System.EventHandler(this.RectangleElementsOnFormRadioButton);
             // 
             // radioButton2
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(125, 29);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(64, 21);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Circle";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.CircleElementsOnFormRadioButton);
+            this.CircleRadioButton.AutoSize = true;
+            this.CircleRadioButton.Location = new System.Drawing.Point(125, 29);
+            this.CircleRadioButton.Name = "radioButton2";
+            this.CircleRadioButton.Size = new System.Drawing.Size(64, 21);
+            this.CircleRadioButton.TabIndex = 1;
+            this.CircleRadioButton.TabStop = true;
+            this.CircleRadioButton.Text = "Circle";
+            this.CircleRadioButton.UseVisualStyleBackColor = true;
+            this.CircleRadioButton.CheckedChanged += new System.EventHandler(this.CircleElementsOnFormRadioButton);
             // 
             // button1
             // 
@@ -91,25 +91,25 @@
             // 
             // radioButton1
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(29, 29);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(81, 21);
-            this.radioButton1.TabIndex = 3;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Triangle";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.TriangleElementsOnFormRadioButton);
+            this.TriangleRadioButton.AutoSize = true;
+            this.TriangleRadioButton.Checked = true;
+            this.TriangleRadioButton.Location = new System.Drawing.Point(29, 29);
+            this.TriangleRadioButton.Name = "radioButton1";
+            this.TriangleRadioButton.Size = new System.Drawing.Size(81, 21);
+            this.TriangleRadioButton.TabIndex = 3;
+            this.TriangleRadioButton.TabStop = true;
+            this.TriangleRadioButton.Text = "Triangle";
+            this.TriangleRadioButton.UseVisualStyleBackColor = true;
+            this.TriangleRadioButton.CheckedChanged += new System.EventHandler(this.TriangleElementsOnFormRadioButton);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(569, 471);
-            this.Controls.Add(this.radioButton3);
-            this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.RectangleRadioButton);
+            this.Controls.Add(this.TriangleRadioButton);
+            this.Controls.Add(this.CircleRadioButton);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
@@ -125,10 +125,10 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton RectangleRadioButton;
+        private System.Windows.Forms.RadioButton CircleRadioButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton TriangleRadioButton;
     }
 }

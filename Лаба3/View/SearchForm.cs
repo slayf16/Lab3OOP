@@ -15,8 +15,15 @@ namespace View
     /// </summary>
     public partial class SearchForm : Form
     {
-        private BindingList<DataGridFigureRow> datas = new BindingList<DataGridFigureRow>();
+        /// <summary>
+        /// 
+        /// </summary>
+        private BindingList<DataGridFigureRow> datas = 
+            new BindingList<DataGridFigureRow>();
 
+        /// <summary>
+        /// 
+        /// </summary>
         public List<int> IndexforSearch { get; set; }
 
         
@@ -40,7 +47,9 @@ namespace View
             
             if (textBox1.Text == "")
             {
-                MessageBox.Show("введите условия для выполнения поиска");
+                MessageBox.Show("введите условия для выполнения поиска",
+                    "Информация", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);    
             }
             else
             {

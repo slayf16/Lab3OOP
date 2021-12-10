@@ -17,18 +17,17 @@ namespace View
     /// </summary>
     public partial class AddForm : Form
     {
-        public FigureBase figure { get; set; }
-      //  private 
         /// <summary>
-        /// список для создания и работы с текстбоксами
+        /// поле для передачи фигуры в другие формы
         /// </summary>
-        private List<TextBox> _textBoxes = new List<TextBox>();
+        public FigureBase Figure { get; set; }    
 
-        private List<TextForTextBox> texts = new List<TextForTextBox>();
-
-        private List<Label> _labels = new List<Label>();
-
-       // private (List<Label> labels, List<TextBox> texts, FigureType type) x =   ( new List<Label> (), new List<TextBox> (), new FigureType ());
+        /// <summary>
+        /// кортеж для создания и хранения элементов формы разных фигур
+        /// </summary>
+        private List<(List<Label> labels, List<TextBox> texts, FigureType type)>
+            _tupleTextBox = new List<(List<Label> labels, List<TextBox> texts,
+                FigureType type)>();
 
         /// <summary>
         /// поле перечисления для создания фигур нужного типа
@@ -46,57 +45,50 @@ namespace View
             //TODO: передать список для поиска в конструктор - выполнил по другому,
             //списки тоже не передаю, передаю между формами только созданную фигуру            
             InitializeComponent();
-            
-           
+            List<Label> labelsForForm = new List<Label>();
+            List<TextBox> textBoxForForm = new List<TextBox>();
+            List<FigureType> figureTypes = new List<FigureType>()
+            {
+                FigureType.Triangle,
+                FigureType.Rectangle,
+                FigureType.Circle
+
+            };                          
             for (int i = 0; i < 6; i++)
             {
-                _textBoxes.Add(new TextBox());
-                _textBoxes[i].Visible = false;
-                _labels.Add(new Label());
-                _labels[i].Visible = false;
-
-                switch (_textBoxes.Count)
-                {
-                    case  3 :
-                        texts.Add(new TextForTextBox()
-                        {
-                            type = FigureType.Triangle,
-                            textBox = _textBoxes.GetRange(0,3),
-                            labels = _labels.GetRange(0,3)
-                        });
-                        break;
-
-                    case 5:
-                        texts.Add(new TextForTextBox()
-                        {
-                            type = FigureType.Rectangle,
-                            textBox = _textBoxes.GetRange(3, 2),
-                            labels = _labels.GetRange(3, 2)
-                        });
-                        break;
-
-                    case 6:
-                        texts.Add(new TextForTextBox()
-                        {
-                            type = FigureType.Circle,
-                            textBox = _textBoxes.GetRange(5, 1),
-                            labels = _labels.GetRange(5, 1)
-                        });
-                        break;
-                }                                                           
-            }    
-
-            for(int i = 0; i<texts.Count;i++)
+                labelsForForm.Add(new Label());
+                textBoxForForm.Add(new TextBox());
+                labelsForForm[i].Visible = false;
+                textBoxForForm[i].Visible = false;                                                                                                 
+            }
+            for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < texts[i].labels.Count; j++)
+                switch (i)
                 {
-                    groupBox1.Controls.Add(texts[i].labels[j]);
-                    groupBox1.Controls.Add(texts[i].textBox[j]);
+                    case 0:
+                        _tupleTextBox.Add((labelsForForm.GetRange(0, 3 - i), 
+                            textBoxForForm.GetRange(0, 3 - i), figureTypes[i]));
+                        break;
+                    case 1:
+                        _tupleTextBox.Add((labelsForForm.GetRange(3, 3 - i),
+                            textBoxForForm.GetRange(3, 3 - i), figureTypes[i]));
+                        break;
+                    case 2:
+                        _tupleTextBox.Add((labelsForForm.GetRange(5, 3 - i),
+                            textBoxForForm.GetRange(5, 3 - i), figureTypes[i]));
+                        break;
+
                 }
             }
-       
-            FormAction();
-            
+            for(int i = 0; i<_tupleTextBox.Count;i++)
+            {
+                for (int j = 0; j < _tupleTextBox[i].labels.Count; j++)
+                {
+                    groupBox1.Controls.Add(_tupleTextBox[i].labels[j]);
+                    groupBox1.Controls.Add(_tupleTextBox[i].texts[j]);
+                }
+            }
+            FormAction();            
         }
 
         /// <summary>
@@ -105,36 +97,44 @@ namespace View
         private void FormAction()
         {
            
-            if (radioButton1.Checked == true)
+            if (TriangleRadioButton.Checked == true)
             {
-                visibleFalse(texts);
+                visibleFalse(_tupleTextBox);
                 _figureType = FigureType.Triangle;
-                CreateElementsforForm(270, 170, 130, "Triangle", new Point(22, 190), new Point(130, 190), 3, "side",texts[0]);                                                                  
+                CreateElementsforForm(270, 170, 130, "Triangle", 
+                    new Point(22, 190), new Point(130, 190), 3, "side",_tupleTextBox[0]);                                                                  
             }
 
-            else if (radioButton2.Checked == true)
+            else if (CircleRadioButton.Checked == true)
             {
-                visibleFalse(texts);
+                visibleFalse(_tupleTextBox);
                 _figureType = FigureType.Circle;
-                CreateElementsforForm(200, 170, 70, "Circle", new Point(22, 125), new Point(130, 125),1,"radius", texts[2]);
+                CreateElementsforForm(200, 170, 70, "Circle", 
+                    new Point(22, 125), new Point(130, 125),1,"radius", _tupleTextBox[2]);
             }
 
-            else if (radioButton3.Checked == true)
+            else if (RectangleRadioButton.Checked == true)
             {
-                visibleFalse(texts);
+                visibleFalse(_tupleTextBox);
                 _figureType = FigureType.Rectangle;
-                CreateElementsforForm(230, 170, 100, "Rectangle", new Point(22, 155), new Point(130, 155),2,"side", texts[1]);
+                CreateElementsforForm(230, 170, 100, "Rectangle", 
+                    new Point(22, 155), new Point(130, 155),2,"side", _tupleTextBox[1]);
             }
         }
 
-        private void visibleFalse(List<TextForTextBox> texts)
+        /// <summary>
+        /// метод для скрытия элементов формы после инициализации
+        /// </summary>
+        /// <param name="tupleElements">кортеж элементов формы</param>
+        private void visibleFalse(List<(List<Label> labels, 
+            List<TextBox> texts, FigureType type)> tupleElements)
         {
-            for (int i = 0; i < texts.Count; i++)
+            for (int i = 0; i < tupleElements.Count; i++)
             {
-                for (int j = 0; j < texts[i].labels.Count; j++)
+                for (int j = 0; j < tupleElements[i].labels.Count; j++)
                 {
-                    texts[i].textBox[j].Visible = false;
-                    texts[i].labels[j].Visible = false;
+                    tupleElements[i].texts[j].Visible = false;
+                    tupleElements[i].labels[j].Visible = false;
                 }
             }
         }
@@ -150,9 +150,12 @@ namespace View
         /// <param name="forButton2">положение кнопки отмена</param>
         /// <param name="indexCountSide">количество сторон определяющих фигуру</param>
         /// <param name="nameSide">название стороны фигруы показываемое на экране</param>
+        /// <param name="tupleElements"></param>
         private void CreateElementsforForm(int heightForm, int widthGrouBox, 
             int heightGroupBox, string nameTypeFigure,
-            Point forButton1, Point  forButton2, int indexCountSide, string nameSide, TextForTextBox box)
+            Point forButton1, Point  forButton2, int indexCountSide, 
+            string nameSide, (List<Label> labels, 
+            List<TextBox> texts, FigureType type) tupleElements)
         {
             this.Width = 255;
             this.Height = heightForm;
@@ -164,15 +167,15 @@ namespace View
             button2.Location = forButton2;
             for (int i = 0; i < indexCountSide; i++)
             {              
-                box.labels[i].Width = 46;
-                box.labels[i].Height = 17;
-                box.labels[i].Location = new Point(5, (i + 1) * 35);
-                box.labels[i].Text = nameSide+(i+1);
-                box.labels[i].Visible = true;
-                box.textBox[i].Location = new Point(60, (i + 1) * 33);
-                box.textBox[i].Visible = true;
+                tupleElements.labels[i].Width = 46;
+                tupleElements.labels[i].Height = 17;
+                tupleElements.labels[i].Location = new Point(5, (i + 1) * 35);
+                tupleElements.labels[i].Text = nameSide+(i+1);
+                tupleElements.labels[i].Visible = true;
+                tupleElements.texts[i].Location = new Point(60, (i + 1) * 33);
+                tupleElements.texts[i].Visible = true;
                 // плюс равно говорит что мы обрабатываем кей пресс событие обрабатывается методом 
-                _textBoxes[i].KeyPress += textBox_KeyPress;
+                tupleElements.texts[i].KeyPress += textBox_KeyPress;
             }
         }
 
@@ -182,12 +185,8 @@ namespace View
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void CircleElementsOnFormRadioButton(object sender, EventArgs e)
-        {
-            
-            for (int i = 0; i < texts.Count; i ++)
-
-            FormAction();
-            
+        {                       
+            FormAction();            
         }
 
         /// <summary>
@@ -216,8 +215,7 @@ namespace View
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void CancelButton(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
+        {          
             this.Close();
         }
 
@@ -228,20 +226,18 @@ namespace View
         /// <param name="e"></param>
         private void OkAddFigureButton(object sender, EventArgs e)
         {
-            //var parent = this.ParentForm as FigureForm;
             try
-            {
+            {                
                 FigureBase newFigure = GetFigure(_figureType);
-                //parent.AddFigureeRow(figure.GetName(), figure.GetInfo());
-                figure = newFigure; 
+                Figure = newFigure; 
                 this.Close();
                 this.DialogResult = DialogResult.OK;
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
-            }
-        
+                MessageBox.Show(ex.Message,"Ошибка",MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }        
         }
 
         /// <summary>
@@ -251,13 +247,11 @@ namespace View
         /// <param name="e"></param>
         private void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            char number = e.KeyChar;
-
-            if (!Char.IsDigit(number) && e.KeyChar != '\b')
+            char number = e.KeyChar;          
+            if (!Char.IsDigit(number) && e.KeyChar != '\b' && e.KeyChar != ',')
             {
                 e.Handled = true;
             }
-
         }
 
         /// <summary>
@@ -268,15 +262,17 @@ namespace View
         private FigureBase GetFigure(FigureType type)
         {
             FigureBase figure = null;
-            List<double> paramsFigure = GetFigureParams();
+            List<double> paramsFigure = GetFigureParams(type);
             switch (type)
             {
                 case FigureType.Triangle:                                        
-                    figure = new Triangle(paramsFigure[0], paramsFigure[1], paramsFigure[2]);
+                    figure = new Triangle(paramsFigure[0], paramsFigure[1],
+                        paramsFigure[2]);
                     break;
 
                 case FigureType.Rectangle:                         
-                    figure = new LibraryForGeometry.Rectangle(paramsFigure[0], paramsFigure[1]);
+                    figure = new LibraryForGeometry.Rectangle(paramsFigure[0],
+                        paramsFigure[1]);
                     break;
 
                 case FigureType.Circle:
@@ -290,14 +286,28 @@ namespace View
         /// метод для считывания параметров с экрана 
         /// </summary>
         /// <returns>возвращает массив числовых параметров фигуры</returns>
-        private List<double> GetFigureParams()
+        private List<double> GetFigureParams(FigureType type)
         {
             List<double> figureParams = new List<double>();
-            foreach(var textbox in _textBoxes)
+            int i =0;
+            switch(type)
+            {
+                case FigureType.Triangle:
+                    i = 0;
+                    break;
+                case FigureType.Rectangle:
+                    i = 1;
+                    break;
+                case FigureType.Circle:
+                    i = 2;
+                    break;
+            }
+            foreach (var textbox in _tupleTextBox[i].texts)
             {
                 figureParams.Add(Convert.ToDouble(textbox.Text));
             }
             return figureParams;
         }
+
     }
 }
