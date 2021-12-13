@@ -50,6 +50,7 @@ namespace View
         /// <param name="e"></param>
         private void AddFigureButton(object sender, EventArgs e)
         {
+            //TODO:RSDN
             AddForm form2 = new AddForm();
             form2.ShowDialog();
             if(form2.DialogResult == DialogResult.OK)
@@ -112,15 +113,13 @@ namespace View
         /// <param name="e"></param>
         private void SearchButton(object sender, EventArgs e)
         {
-            List<int> indexFofSearch = new List<int>();
-            SearchForm form3 = new SearchForm(FigureList);
+            //TODO:RSDN
+            var form3 = new SearchForm(FigureList);
             form3.ShowDialog();
-            if (form3.DialogResult == DialogResult.OK)
-            {
-                indexFofSearch = form3.IndexforSearch;
-                SelectRow(indexFofSearch);
+            if (form3.DialogResult != DialogResult.OK) return;
 
-            }
+            var indexFofSearch = form3.IndexforSearch;
+            SelectRow(indexFofSearch);
         }
 
         /// <summary>
@@ -162,7 +161,7 @@ namespace View
             }
             else
             {
-                //TODO: RSDN+
+                //TODO: создать локально.
                 if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
                 {
                     return;
@@ -180,7 +179,7 @@ namespace View
         {
             try
             {
-
+                //TODO: создать локально.
                 if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                 {
                     return;
@@ -218,8 +217,7 @@ namespace View
                 DialogResult dialog = MessageBox.Show("вы действительно хотите выйти?", 
                     "завершение работы", 
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                //TODO: switch-case+
+                
                 switch (dialog)
                 {
                     case DialogResult.Yes:

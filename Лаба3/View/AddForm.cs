@@ -1,12 +1,7 @@
 ﻿using LibraryForGeometry;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -25,61 +20,27 @@ namespace View
         /// <summary>
         /// кортеж для создания и хранения элементов формы разных фигур
         /// </summary>
-        private List<(List<Label> labels, List<TextBox> texts, FigureType type)>
-            _tupleTextBox = new List<(List<Label> labels, List<TextBox> texts,
-                FigureType type)>();
+        private readonly List<(List<Label> labels, List<TextBox> texts, FigureType type)>
+            _tupleTextBox;
 
         /// <summary>
         /// поле перечисления для создания фигур нужного типа
         /// </summary>
         private FigureType _figureType;
-       
-        //TODO: убрать.+ убрал родительскую форму
-
 
         /// <summary>
         /// конструктор формы
         /// </summary>
         public AddForm()
-        {
-            //TODO: передать список для поиска в конструктор - выполнил по другому,
-            //списки тоже не передаю, передаю между формами только созданную фигуру            
+        {         
             InitializeComponent();
-            List<Label> labelsForForm = new List<Label>();
-            List<TextBox> textBoxForForm = new List<TextBox>();
-            List<FigureType> figureTypes = new List<FigureType>()
+            _tupleTextBox = new List<(List<Label> labels, List<TextBox> texts, FigureType type)>()
             {
-                FigureType.Triangle,
-                FigureType.Rectangle,
-                FigureType.Circle
-
-            };                          
-            for (int i = 0; i < 6; i++)
-            {
-                labelsForForm.Add(new Label());
-                textBoxForForm.Add(new TextBox());
-                labelsForForm[i].Visible = false;
-                textBoxForForm[i].Visible = false;                                                                                                 
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                switch (i)
-                {
-                    case 0:
-                        _tupleTextBox.Add((labelsForForm.GetRange(0, 3 - i), 
-                            textBoxForForm.GetRange(0, 3 - i), figureTypes[i]));
-                        break;
-                    case 1:
-                        _tupleTextBox.Add((labelsForForm.GetRange(3, 3 - i),
-                            textBoxForForm.GetRange(3, 3 - i), figureTypes[i]));
-                        break;
-                    case 2:
-                        _tupleTextBox.Add((labelsForForm.GetRange(5, 3 - i),
-                            textBoxForForm.GetRange(5, 3 - i), figureTypes[i]));
-                        break;
-
-                }
-            }
+                GetFigureControls(3, FigureType.Triangle),
+                GetFigureControls(2, FigureType.Rectangle),
+                GetFigureControls(1, FigureType.Circle)
+            };
+            
             for(int i = 0; i<_tupleTextBox.Count;i++)
             {
                 for (int j = 0; j < _tupleTextBox[i].labels.Count; j++)
@@ -89,6 +50,26 @@ namespace View
                 }
             }
             FormAction();            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="figureType"></param>
+        /// <returns></returns>
+        private static (List<Label>, List<TextBox>, FigureType) 
+            GetFigureControls(int count, FigureType figureType)
+        {
+            var figureControls =
+                (new List<Label>(count), new List<TextBox>(count), figureType);
+            for (var i = 0; i < count; i++)
+            {
+                figureControls.Item1.Add(new Label());
+                figureControls.Item2.Add(new TextBox());
+            }
+
+            return figureControls;
         }
 
         /// <summary>
@@ -179,6 +160,7 @@ namespace View
             }
         }
 
+        //TODO: дубли
         /// <summary>
         /// метод для обновления формы при взаимодействии с чек 2
         /// </summary>
@@ -186,7 +168,7 @@ namespace View
         /// <param name="e"></param>
         private void CircleElementsOnFormRadioButton(object sender, EventArgs e)
         {                       
-            FormAction();            
+            FormAction();
         }
 
         /// <summary>
