@@ -42,7 +42,7 @@ namespace View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
+        private void SearchButton(object sender, EventArgs e)
         {
             
             if (textBox1.Text == "")
@@ -75,7 +75,7 @@ namespace View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
+        private void CancelButton(object sender, EventArgs e)
         {
             this.Close();
         }
