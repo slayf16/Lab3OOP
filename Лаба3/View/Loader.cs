@@ -51,7 +51,7 @@ namespace View
             }
             catch(Exception ex)
             {
-                throw new Exception("неверная структура или файл поврежден");
+                throw new Exception("wrong structure or file damaged");
             }
         }
     }

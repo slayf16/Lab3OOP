@@ -50,13 +50,13 @@ namespace View
         /// <param name="e"></param>
         private void AddFigureButton(object sender, EventArgs e)
         {
-            //TODO:RSDN
-            AddForm form2 = new AddForm();
-            form2.ShowDialog();
-            if(form2.DialogResult == DialogResult.OK)
+            //TODO:RSDN +
+            AddForm AddForm = new AddForm();
+            AddForm.ShowDialog();
+            if(AddForm.DialogResult == DialogResult.OK)
             {
-                Figures.Add(form2.Figure);
-                AddFigureeRow(form2.Figure.GetName(), form2.Figure.GetInfo());
+                Figures.Add(AddForm.Figure);
+                AddFigureeRow(AddForm.Figure.GetName(), AddForm.Figure.GetInfo());
             }            
         }
 
@@ -95,8 +95,8 @@ namespace View
         {
             if (FigureList.Count == 0)
             {
-                MessageBox.Show("Список пустой","информация",MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                MessageBox.Show("List is empty", "information",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
@@ -113,12 +113,12 @@ namespace View
         /// <param name="e"></param>
         private void SearchButton(object sender, EventArgs e)
         {
-            //TODO:RSDN
-            var form3 = new SearchForm(FigureList);
-            form3.ShowDialog();
-            if (form3.DialogResult != DialogResult.OK) return;
+            //TODO:RSDN+
+            var SearchForm = new SearchForm(FigureList);
+            SearchForm.ShowDialog();
+            if (SearchForm.DialogResult != DialogResult.OK) return;
 
-            var indexFofSearch = form3.IndexforSearch;
+            var indexFofSearch = SearchForm.IndexforSearch;
             SelectRow(indexFofSearch);
         }
 
@@ -154,19 +154,23 @@ namespace View
         /// <param name="e"></param>
         private void SaveButtonMenuStrip(object sender, EventArgs e)
         {
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "(*.fig) | *.fig";
+
+
             if (FigureList.Count == 0)
             {
-                MessageBox.Show("Отсутствуют данные для сохранения","Информация",
+                MessageBox.Show("No data to save", "information",
                     MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
             else
             {
-                //TODO: создать локально.
-                if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+                //TODO: создать локально.+
+                if (save.ShowDialog() == DialogResult.Cancel)
                 {
                     return;
                 }
-                Loader.SaveFile(saveFileDialog1.FileName, Figures);
+                Loader.SaveFile(save.FileName, Figures);
             }
         }
 
@@ -179,14 +183,16 @@ namespace View
         {
             try
             {
-                //TODO: создать локально.
-                if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
+                OpenFileDialog openFile = new OpenFileDialog();
+                openFile.Filter = "(*.fig)|*.fig";
+                //TODO: создать локально.+
+                if (openFile.ShowDialog() == DialogResult.Cancel)
                 {
                     return;
                 }
                 Figures.Clear();
                 FigureList.Clear();
-                Figures = Loader.LoadFile(openFileDialog1.FileName);
+                Figures = Loader.LoadFile(openFile.FileName);
                 foreach (FigureBase figureBase in Figures)
                 {
                     FigureList.Add(new DataGridFigureRow()
@@ -199,7 +205,7 @@ namespace View
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
 
@@ -214,9 +220,8 @@ namespace View
         {
             if(FigureList.Count!=0)
             {
-                DialogResult dialog = MessageBox.Show("вы действительно хотите выйти?", 
-                    "завершение работы", 
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult dialog = MessageBox.Show("Do you really want to exit?",
+                    "shutdown", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 
                 switch (dialog)
                 {

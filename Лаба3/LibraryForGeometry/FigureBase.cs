@@ -31,7 +31,7 @@ namespace LibraryForGeometry
             if (number < 0.0)
             {
 
-                throw new Exception("Величина должна быть положительной");
+                throw new Exception("The value must be positive");
             }
             else
             {

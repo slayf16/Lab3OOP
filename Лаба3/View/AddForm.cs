@@ -53,7 +53,7 @@ namespace View
         }
 
         /// <summary>
-        /// 
+        /// Метод для создания текстбоксов фигур
         /// </summary>
         /// <param name="count"></param>
         /// <param name="figureType"></param>
@@ -77,13 +77,13 @@ namespace View
         /// </summary>
         private void FormAction()
         {
-           
             if (TriangleRadioButton.Checked == true)
             {
                 visibleFalse(_tupleTextBox);
                 _figureType = FigureType.Triangle;
                 CreateElementsforForm(270, 170, 130, "Triangle", 
-                    new Point(22, 190), new Point(130, 190), 3, "side",_tupleTextBox[0]);                                                                  
+                    new Point(22, 190), new Point(130, 190), 3, 
+                    new string [] {"side1", "side2", "side3" },_tupleTextBox[0]);                                                                  
             }
 
             else if (CircleRadioButton.Checked == true)
@@ -91,7 +91,8 @@ namespace View
                 visibleFalse(_tupleTextBox);
                 _figureType = FigureType.Circle;
                 CreateElementsforForm(200, 170, 70, "Circle", 
-                    new Point(22, 125), new Point(130, 125),1,"radius", _tupleTextBox[2]);
+                    new Point(22, 125), new Point(130, 125),1, 
+                    new string[] { "radius" }, _tupleTextBox[2]);
             }
 
             else if (RectangleRadioButton.Checked == true)
@@ -99,7 +100,8 @@ namespace View
                 visibleFalse(_tupleTextBox);
                 _figureType = FigureType.Rectangle;
                 CreateElementsforForm(230, 170, 100, "Rectangle", 
-                    new Point(22, 155), new Point(130, 155),2,"side", _tupleTextBox[1]);
+                    new Point(22, 155), new Point(130, 155),2, 
+                    new string[] { "Length", "Width"}, _tupleTextBox[1]);
             }
         }
 
@@ -135,7 +137,7 @@ namespace View
         private void CreateElementsforForm(int heightForm, int widthGrouBox, 
             int heightGroupBox, string nameTypeFigure,
             Point forButton1, Point  forButton2, int indexCountSide, 
-            string nameSide, (List<Label> labels, 
+            string[] nameSide, (List<Label> labels, 
             List<TextBox> texts, FigureType type) tupleElements)
         {
             this.Width = 255;
@@ -151,7 +153,7 @@ namespace View
                 tupleElements.labels[i].Width = 46;
                 tupleElements.labels[i].Height = 17;
                 tupleElements.labels[i].Location = new Point(5, (i + 1) * 35);
-                tupleElements.labels[i].Text = nameSide+(i+1);
+                tupleElements.labels[i].Text = nameSide[i];
                 tupleElements.labels[i].Visible = true;
                 tupleElements.texts[i].Location = new Point(60, (i + 1) * 33);
                 tupleElements.texts[i].Visible = true;
@@ -160,36 +162,17 @@ namespace View
             }
         }
 
-        //TODO: дубли
+        //TODO: дубли+
         /// <summary>
         /// метод для обновления формы при взаимодействии с чек 2
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CircleElementsOnFormRadioButton(object sender, EventArgs e)
+        private void RadioButtonClick(object sender, EventArgs e)
         {                       
             FormAction();
         }
 
-        /// <summary>
-        /// метод для обновления формы при взаимодействии с чеком 3
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RectangleElementsOnFormRadioButton(object sender, EventArgs e)
-        {
-            FormAction();
-        }
-
-        /// <summary>
-        /// метод для обновления формы при взаимодействии с чекбоксом 1
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TriangleElementsOnFormRadioButton(object sender, EventArgs e)
-        {
-            FormAction();
-        }
 
         /// <summary>
         /// Событие, при нажатии кнопки отмена
@@ -217,7 +200,7 @@ namespace View
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message,"Ошибка",MessageBoxButtons.OK,
+                MessageBox.Show("Data entered incorrectly", "Error",MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }        
         }

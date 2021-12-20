@@ -47,8 +47,8 @@ namespace View
             
             if (textBox1.Text == "")
             {
-                MessageBox.Show("введите условия для выполнения поиска",
-                    "Информация", MessageBoxButtons.OK,
+                MessageBox.Show("enter your search terms",
+                    "Information", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);    
             }
             else

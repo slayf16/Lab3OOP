@@ -85,7 +85,7 @@ namespace LibraryForGeometry
             }
             else
             {
-                throw new Exception("Треугольника не существует");
+                throw new Exception("There is no such triangle");
             }
         }
 
