@@ -16,13 +16,13 @@ namespace View
     public partial class SearchForm : Form
     {
         /// <summary>
-        /// 
+        /// поле формы с данными , которые хранятся на главной форме
         /// </summary>
-        private BindingList<DataGridFigureRow> datas = 
+        private BindingList<DataGridFigureRow> dataFromTheFigureForm = 
             new BindingList<DataGridFigureRow>();
 
         /// <summary>
-        /// 
+        /// поле для присвания и передачи индекса фигуры после выполнения поиска
         /// </summary>
         public List<int> IndexforSearch { get; set; }
 
@@ -34,7 +34,7 @@ namespace View
         public SearchForm(BindingList<DataGridFigureRow> datas)
         {
             InitializeComponent();
-            this.datas = datas;
+            this.dataFromTheFigureForm = datas;
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace View
             {
                 List<int> index = new List<int>();
                 int i = 0;
-                foreach (DataGridFigureRow str in datas)
+                foreach (DataGridFigureRow str in dataFromTheFigureForm)
                 {
                     if (str.FigureName.Contains(textBox1.Text) ||
                         str.FigureProps.Contains(textBox1.Text))
