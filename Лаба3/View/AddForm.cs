@@ -212,7 +212,7 @@ namespace View
         private void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             char number = e.KeyChar;          
-            if (!Char.IsDigit(number) && e.KeyChar != '\b' && e.KeyChar != ',')
+            if (!Char.IsDigit(number) && e.KeyChar != '\b' && e.KeyChar != '.')
             {
                 e.Handled = true;
             }

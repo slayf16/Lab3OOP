@@ -26,7 +26,7 @@ namespace View
         
 
         /// <summary>
-        /// 
+        /// фигуры
         /// </summary>
         public List<FigureBase> Figures = new List<FigureBase>(); 
 
@@ -51,12 +51,12 @@ namespace View
         private void AddFigureButton(object sender, EventArgs e)
         {
             //TODO:RSDN +
-            AddForm AddForm = new AddForm();
-            AddForm.ShowDialog();
-            if(AddForm.DialogResult == DialogResult.OK)
+            AddForm addForm = new AddForm();
+            addForm.ShowDialog();
+            if(addForm.DialogResult == DialogResult.OK)
             {
-                Figures.Add(AddForm.Figure);
-                AddFigureeRow(AddForm.Figure.GetName(), AddForm.Figure.GetInfo());
+                Figures.Add(addForm.Figure);
+                AddFigureeRow(addForm.Figure.GetName(), addForm.Figure.GetInfo());
             }            
         }
 
@@ -100,10 +100,18 @@ namespace View
             }
             else
             {
-                //BUG:
-                int delet = dataGridView1.SelectedCells[0].RowIndex;
-                dataGridView1.Rows.RemoveAt(delet);
-                Figures.RemoveAt(delet);
+                //BUG:+
+                try
+                {
+                    int delet = dataGridView1.SelectedCells[0].RowIndex;
+                    dataGridView1.Rows.RemoveAt(delet);
+                    Figures.RemoveAt(delet);
+                }
+                catch
+                {                   
+                    MessageBox.Show("highlight the item", "error",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -115,11 +123,11 @@ namespace View
         private void SearchButton(object sender, EventArgs e)
         {
             //TODO:RSDN+
-            var SearchForm = new SearchForm(FigureList);
-            SearchForm.ShowDialog();
-            if (SearchForm.DialogResult != DialogResult.OK) return;
+            var searchForm = new SearchForm(FigureList);
+            searchForm.ShowDialog();
+            if (searchForm.DialogResult != DialogResult.OK) return;
 
-            var indexFofSearch = SearchForm.IndexforSearch;
+            var indexFofSearch = searchForm.IndexforSearch;
             SelectRow(indexFofSearch);
         }
 
@@ -180,6 +188,9 @@ namespace View
         /// <param name="e"></param>
         private void LoadButtonMenuStrip(object sender, EventArgs e)
         {
+            var figures = new List<FigureBase>();
+            var figureList =
+                new BindingList<DataGridFigureRow>();
             try
             {
                 OpenFileDialog openFile = new OpenFileDialog();
@@ -188,17 +199,20 @@ namespace View
                 {
                     return;
                 }
-                Figures.Clear();
-                FigureList.Clear();
-                Figures = Loader.LoadFile(openFile.FileName);
-                foreach (FigureBase figureBase in Figures)
+         
+                figures = Loader.LoadFile(openFile.FileName);
+                foreach (FigureBase figureBase in figures)
                 {
-                    FigureList.Add(new DataGridFigureRow()
+                    figureList.Add(new DataGridFigureRow()
                     {
                         FigureName = figureBase.GetName(),
                         FigureProps = figureBase.GetInfo(),
                     });
                 }
+                Figures.Clear();
+                FigureList.Clear();
+                FigureList = figureList;
+                Figures = figures;
                 dataGridView1.DataSource = FigureList;
             }
             catch(Exception ex)
