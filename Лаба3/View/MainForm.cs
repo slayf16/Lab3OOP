@@ -100,6 +100,7 @@ namespace View
             }
             else
             {
+                //BUG:
                 int delet = dataGridView1.SelectedCells[0].RowIndex;
                 dataGridView1.Rows.RemoveAt(delet);
                 Figures.RemoveAt(delet);
@@ -157,7 +158,6 @@ namespace View
             SaveFileDialog save = new SaveFileDialog();
             save.Filter = "(*.fig) | *.fig";
 
-
             if (FigureList.Count == 0)
             {
                 MessageBox.Show("No data to save", "information",
@@ -165,7 +165,6 @@ namespace View
             }
             else
             {
-                //TODO: создать локально.+
                 if (save.ShowDialog() == DialogResult.Cancel)
                 {
                     return;
@@ -185,7 +184,6 @@ namespace View
             {
                 OpenFileDialog openFile = new OpenFileDialog();
                 openFile.Filter = "(*.fig)|*.fig";
-                //TODO: создать локально.+
                 if (openFile.ShowDialog() == DialogResult.Cancel)
                 {
                     return;

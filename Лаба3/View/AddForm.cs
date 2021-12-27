@@ -161,8 +161,7 @@ namespace View
                 tupleElements.texts[i].KeyPress += textBox_KeyPress;
             }
         }
-
-        //TODO: дубли+
+        
         /// <summary>
         /// метод для обновления формы при взаимодействии с чек 2
         /// </summary>
