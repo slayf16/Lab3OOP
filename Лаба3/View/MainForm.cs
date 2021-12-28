@@ -108,8 +108,8 @@ namespace View
                 }
                 catch
                 {                   
-                    MessageBox.Show("highlight the item", "error",
-                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Highlight the item", "Information",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
