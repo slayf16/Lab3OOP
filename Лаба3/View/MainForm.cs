@@ -50,7 +50,6 @@ namespace View
         /// <param name="e"></param>
         private void AddFigureButton(object sender, EventArgs e)
         {
-            //TODO:RSDN +
             AddForm addForm = new AddForm();
             addForm.ShowDialog();
             if(addForm.DialogResult == DialogResult.OK)
@@ -122,7 +121,6 @@ namespace View
         /// <param name="e"></param>
         private void SearchButton(object sender, EventArgs e)
         {
-            //TODO:RSDN+
             var searchForm = new SearchForm(FigureList);
             searchForm.ShowDialog();
             if (searchForm.DialogResult != DialogResult.OK) return;
